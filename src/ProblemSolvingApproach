@@ -1,0 +1,35 @@
+PROBLEM SOLVING APPROACH:
+    - Understand the problem
+    - Explore concrete examples
+    - Break it down
+    - Solve / simplify
+    - Look back and refactor
+
+UNDERSTAND
+    1. Restate the problem in own words
+    2. What are the inputs?
+    3. What are the outputs?
+    4. Is information given enough to solve the problem?
+
+EXPLORE
+    1. Start with simple examples
+    2. Progress to more complex examples
+    3. Explore examples with empty inputs
+    4. Explore examples with invalid inputs
+
+BREAK
+    1. Explicitly write the steps needed to take
+
+SIMPLIFY
+    1. Find the core difficulty in your algorithm
+    2. Temporarily ignore that difficulty
+    3. Write a simplified solution
+    4. Get back to the difficulty
+
+REFACTOR
+    1. Can you check the result?
+    2. Can you solve it differently?
+    3. Can you understand the solution at glance?
+    4. Can you use the solution for solving other problem?
+    5. Can you improve performance of your solution?
+    6. How other people solved this problem?

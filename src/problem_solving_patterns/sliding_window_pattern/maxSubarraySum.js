@@ -32,5 +32,37 @@ module.exports.naiveSolution = function naiveSolution(array, n) {
     return max;
 }
 
+// better solution using sliding window pattern - O(n) complexity
+module.exports.betterSolution = function betterSolution(array, n) {
+    // check if n is not greater than array length
+    if (array.length < n) {
+        return null;
+    }
 
-//naiveSolution([2,7,1,8,15,2,4,6], 2);
+    // initialize variables to hold max and temp values
+    let max = 0;
+    let temp = 0;
+
+    // get sum of first n numbers
+    for (let i = 0; i < n; i++) {
+        temp += array[i];
+    }
+
+    // our maximum value is temp (at least temporarily)
+    max = temp;
+
+    // start iteration from n'th index
+    for (let i = n; i < array.length; i++) {
+
+        // we have already calculated sum of first n numbers
+        // now need only to subtract i-n number and add i number to get the next sum
+        temp = temp - array[i - n] + array[i];
+        if (temp > max) {
+            max = temp;
+        }
+    }
+
+    return max;
+}
+
+//naiveSolution([2,7,1,8,15,2,4,6], 2)

@@ -1,0 +1,5 @@
+Recursive function - functon which calls itself. 
+Can be used in JSON.parse, JSON.stringify implementation for different browsers.
+Two essentials of recursive function:
+1. Base case
+2. Different (smaller) input in each call

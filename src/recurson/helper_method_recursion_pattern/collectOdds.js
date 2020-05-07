@@ -2,7 +2,7 @@
 
 // below solution implemented using Helper Method Recursion pattern 
 // this is outer non-recursive function
-module.exports = function collectOdds(array) {
+module.exports.collectOdds = function collectOdds(array) {
     
     // outer function holds property which will be manipulated by inner function
     let result = [];
@@ -29,4 +29,27 @@ module.exports = function collectOdds(array) {
     helper(array);
 
     return result;
+}
+
+// below solution using pure recursion
+module.exports.collectOddsPureRecursion = function collectOddsPureRecursion(array) {
+
+    // base case
+    if (array.length === 0) {
+        return [];
+    }
+
+    // create empty array for every recursive call
+    const temp = [];
+
+    // if number is odd, add it to temp array
+    if (array[0] % 2 !== 0) {
+        temp.push(array[0]);
+    }
+
+    // remove number which was checked from the original array
+    array = array.splice(1);
+
+    // concatenate temp array with recursive call on smaller array
+    return temp.concat(collectOddsPureRecursion(array));
 }

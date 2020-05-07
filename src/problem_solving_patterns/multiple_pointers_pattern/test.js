@@ -1,5 +1,6 @@
 const sumZero = require('./sumZero');
 const uniqueVal = require('./countUniqueValues');
+const duplicates = require('./areThereDuplicates');
 
 console.log("Naive solution found: " + sumZero.naiveSolution([-3,-2,-1,0,1,2,3]));
 console.log("Naive solution not found: " + sumZero.naiveSolution([-1,2,3]));
@@ -15,3 +16,9 @@ console.log("Count Unique Values (sol1): " + uniqueVal.betterSolution([-2,-1,-1,
 console.log("Count Unique Values (sol2): " + uniqueVal.anotherBetterSolution([-1,-1,1,1,1,2,3,4,10]));
 console.log("Count Unique Values (sol2): " + uniqueVal.anotherBetterSolution([0,0,0,0,0,0,10]));
 console.log("Count Unique Values (sol2): " + uniqueVal.anotherBetterSolution([]));
+
+console.log("Are there duplicates (naive): " + duplicates.naiveSolution(1,2,5,3,5,7,6,11));
+console.log("Are there duplicates (naive): " + duplicates.naiveSolution(1,2,3,5,7,6,11));
+
+console.log("Are there duplicates (better): " + duplicates.betterSolution(1,2,5,3,5,7,6,11));
+console.log("Are there duplicates (better): " + duplicates.betterSolution(1,2,3,5,7,6,11));

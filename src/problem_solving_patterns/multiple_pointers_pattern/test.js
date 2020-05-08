@@ -2,6 +2,7 @@ const sumZero = require('./sumZero');
 const uniqueVal = require('./countUniqueValues');
 const duplicates = require('./areThereDuplicates');
 const averagePair = require('./averagePair');
+const isSubsequence = require('./isSubsequence');
 
 console.log("Naive solution found: " + sumZero.naiveSolution([-3,-2,-1,0,1,2,3]));
 console.log("Naive solution not found: " + sumZero.naiveSolution([-1,2,3]));
@@ -28,3 +29,8 @@ console.log("Average pair (expected true): " + averagePair([1,3,3,5,6,7,10,12,19
 console.log("Average pair (expected false): " + averagePair([-5,1,3,3,5,6,7,10,12,19], 0));
 console.log("Average pair (expected true): " + averagePair([1,1], 1));
 console.log("Average pair (expected false): " + averagePair([1], 1));
+
+console.log("isSubsequent (expected true): " + isSubsequence("sing", "string"));
+console.log("isSubsequent (expected true): " + isSubsequence("hello", "hello world"));
+console.log("isSubsequent (expected true): " + isSubsequence("wame?", "what's your name?"));
+console.log("isSubsequent (expected false): " + isSubsequence("abc", "acb"));

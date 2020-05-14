@@ -1,0 +1,19 @@
+Binary search is faster than linear search. It uses Divide and Conquer pattern.
+Rather than eliminating one element at a time, binary search eliminates half of the remaining elements.
+Binary search works only on sorted arrays.
+
+Consider a scenario when searching for number 13. (worst case - 13 is not in the array)
+[2,4,5,9,11,14,15,19,21,25,28,30,50,52,60,63] - iteration 1
+                  ^
+[2,4,5,9,11,14,15] - iteration 2
+       ^
+[11,14,15] - iteration 3
+    ^
+[11] - iteration 4
+ ^
+
+ It took 4 steps to check 16 elements.
+ If we had 32 elements, it would take 5 steps.
+ If we had 64 elements, it would take 6 steps.
+Thus we can draw a conclusion that time complexity of this algorithm is log(n) (log2(16) = 4,
+log2(32) = 5, log2(64) = 6) which is very good (almost as good as O(1))

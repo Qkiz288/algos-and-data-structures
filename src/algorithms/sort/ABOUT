@@ -1,0 +1,21 @@
+
+                    Time complexity     Time complexity     Time complexity     Space complexity
+                        (Best)              (Average)           (Worst)
+
+Bubble sort             O(n)                O(n^2)              O(n^2)              O(1)
+Insertion sort          O(n)                O(n^2)              O(n^2)              O(1)
+Selection sort          O(n^2)              O(n^2)              O(n^2)              O(1)
+
+BUBBLE SORT
+Iterate through the array and swap adjacent elements (push greatest/smallest elements to the end) until collection is sorted.
++ performs very well for almost sorted data.
+
+INSERTION SORT
+Iterate towards right side of the array and place the elements in correct spot on the left side.
++ performs very well for almost sorted data.
++ good for keeping collection continously sorted (for example when data is coming all the time).
+
+SELECTION SORT
+Iterate though the collection each time to find the lowest item and if found, swap.
++ easy to understand.
+- performs very bad even on almost sorted data.

@@ -5,12 +5,12 @@
 
 // time complexity - O(n^2)
 module.exports.naiveBubbleSort = function naiveBubbleSort(array) {
-    let numberOfOperations = 0;
+    let numberOfIterations = 0;
 
     for (let k = 0; k < array.length; k++) {
-        numberOfOperations++;
+        numberOfIterations++;
         for (let i = 0; i < array.length - 1; i++) {
-            numberOfOperations++;
+            numberOfIterations++;
             // if current element is greater than next elements -> swap the items
             if (array[i] > array[i + 1]) {
                 let temp = array[i];
@@ -19,7 +19,7 @@ module.exports.naiveBubbleSort = function naiveBubbleSort(array) {
             }
         }
     }
-    console.log("Not optimized bubble sort operations count (n^2): " + numberOfOperations);
+    console.log("Not optimized bubble sort iterations count (n^2): " + numberOfIterations);
     return array;
 }
 
@@ -31,15 +31,15 @@ module.exports.naiveBubbleSort = function naiveBubbleSort(array) {
 // etc.
 
 module.exports.optimizedBubbleSort = function optimizedBubbleSort(array) {
-    let numberOfOperations = 0;
+    let numberOfIterations = 0;
 
     // start outer loop at the end of the array
     for (let k = array.length - 1; k > 0; k--) {
-        numberOfOperations++;
+        numberOfIterations++;
 
         // inner loop shrinks as outer loop decrements
         for (let i = 0; i < k; i++) {
-            numberOfOperations++;
+            numberOfIterations++;
 
             // if current element is greater than next elements -> swap the items
             if (array[i] > array[i + 1]) {
@@ -49,7 +49,7 @@ module.exports.optimizedBubbleSort = function optimizedBubbleSort(array) {
             }
         }
     }
-    console.log("Optimized bubble sort operations count: " + numberOfOperations);
+    console.log("Optimized bubble sort iterations count: " + numberOfIterations);
     return array;
 }
 
@@ -58,17 +58,17 @@ module.exports.optimizedBubbleSort = function optimizedBubbleSort(array) {
 
 // if array is almost sorted (best case) - time complexity O(n)
 module.exports.evenMoreOptimizedBubbleSort = function evenMoreOptimizedBubbleSort(array) {
-    let numberOfOperations = 0;
+    let numberOfIterations = 0;
 
     // start outer loop at the end of the array
     for (let k = array.length - 1; k > 0; k--) {
-        numberOfOperations++;
+        numberOfIterations++;
         // add flag to indicate if swap was performed
         let swapped = false;
 
         // inner loop shrinks as outer loop decrements
         for (let i = 0; i < k; i++) {
-            numberOfOperations++;
+            numberOfIterations++;
 
             // if current element is greater than next elements -> swap the items
             if (array[i] > array[i + 1]) {
@@ -86,6 +86,6 @@ module.exports.evenMoreOptimizedBubbleSort = function evenMoreOptimizedBubbleSor
             break;
         }
     }
-    console.log("Even more optimized bubble sort operations count: " + numberOfOperations);
+    console.log("Even more optimized bubble sort iterations count: " + numberOfIterations);
     return array;
 }

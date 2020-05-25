@@ -11,7 +11,6 @@ module.exports = function radixSort(numbers) {
         }
         numbers = [];
         for (let j = 0; j <=9; j++) {
-            let a = bucket[j];
             numbers = numbers.concat(bucket[j]);
         }
     }

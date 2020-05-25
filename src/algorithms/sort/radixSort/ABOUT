@@ -1,0 +1,45 @@
+Radix sort is a special kind of sorting algorithm that works on lists of numbers.
+It never makes comparisons between elements.
+
+Algorithm creates a list of 'buckets' - for decimal numbers - 10 buckets, for binary numbers - 2 buckets etc.
+Algorithm goes from left to right and checks the right digit of a number and places the number in it's bucket
+
+Given:
+[4, 55, 262, 7, 45, 182]
+
+Step 1: put numbers in correct buckets
+
+        182         45
+        262     4   55      7
+_       _       _   _       _
+0   1   2   3   4   5   6   7   8   9
+
+Step 2: take out the numbers from the buckets
+
+[262, 182, 4, 55, 45, 7]
+
+Step 3: put numbers in correct buckets (look at second last digit)
+
+7                               182
+4               45  55  262
+_       _       _   _   _   _
+0   1   2   3   4   5   6   7   8   9
+
+Step 4: take out the numbers from the buckets
+
+[4, 7, 45 , 55, 262, 182]
+
+Step 5: put numbers in correct buckets (look at third last digit)
+
+55
+45
+7
+4   182 262
+_   _   _
+0   1   2   3   4   5   6   7   8   9
+
+Step 6: take out the numbers from the buckets
+
+[4, 7, 45, 55, 182, 262]
+
+Done!

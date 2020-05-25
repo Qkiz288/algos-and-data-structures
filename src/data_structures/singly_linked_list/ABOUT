@@ -1,0 +1,9 @@
+Features:
+- do not have indexes
+- connected via nodes with a 'next' pointer
+- random access not allowed
+
+HEAD    LENGTH = 4   TAIL
+|                    |
+4 ---> 6 ---> 8 ---> 2 ---> null
+  next   next   next   next

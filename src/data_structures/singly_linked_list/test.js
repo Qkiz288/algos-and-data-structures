@@ -29,6 +29,13 @@ console.log(list.unshift("!").toString());
 console.log(list.unshift("again").toString());
 console.log(list.unshift("Hello").toString());
 
+console.log("--- GET ---");
+console.log(list.get(3));
+console.log(list.get(2));
+console.log(list.get(1));
+console.log(list.get(0));
+console.log(list.get(-1));
+
 function pushData(list) {
     list.push("Hello");
     list.push("linked");

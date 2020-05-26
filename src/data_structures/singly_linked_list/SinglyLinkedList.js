@@ -31,7 +31,7 @@ module.exports.SinglyLinkedList = class SinglyLinkedList {
         }
         let current = this.head;
         let newTail = current;
-        while(current.next) {
+        while (current.next) {
             newTail = current;
             current = current.next;
         }
@@ -67,5 +67,18 @@ module.exports.SinglyLinkedList = class SinglyLinkedList {
             this.tail = this.head;
         }
         return this;
+    }
+
+    get(index) {
+        if (index < 0 || index >= this.length) {
+            return undefined;
+        }
+        let counter = 0;
+        let node = this.head;
+        while (counter !== index) {
+            counter++;
+            node = node.next;
+        }
+        return node;
     }
 }

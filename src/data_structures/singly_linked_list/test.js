@@ -44,6 +44,17 @@ console.log(list.set(3, "Invalid"));
 console.log(list.set(2, "!!!"));
 console.log(list.toString());
 
+console.log("--- INSERT ---")
+console.log(list.insert(-1, "Invalid"));
+console.log(list.insert(4, "Invalid"));
+console.log(list.insert(0, "Big"));
+console.log(list.toString());
+console.log(list.insert(4, "!"));
+console.log(list.toString());
+console.log(list.insert(3, "my friend"));
+console.log(list.toString());
+
+
 function pushData(list) {
     list.push("Hello");
     list.push("linked");

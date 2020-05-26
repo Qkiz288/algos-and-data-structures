@@ -90,4 +90,22 @@ module.exports.SinglyLinkedList = class SinglyLinkedList {
         }
         return false;
     }
+
+    insert(index, value) {
+        if (index < 0 || index > this.length) {
+            return false;
+        }
+        if (index === this.length) {
+            return !!this.push(value);
+        }
+        if (index === 0) {
+            return !!this.unshift(value);
+        }
+        const insertedNode = new Node(value);
+        const previousNode = this.get(index - 1);
+        insertedNode.next = previousNode.next;
+        previousNode.next = insertedNode;
+        this.length += 1;
+        return true;
+    }
 }

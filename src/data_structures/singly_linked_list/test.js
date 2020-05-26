@@ -54,6 +54,13 @@ console.log(list.toString());
 console.log(list.insert(3, "my friend"));
 console.log(list.toString());
 
+console.log("--- REMOVE ---");
+console.log(list.remove(-1));
+console.log(list.remove(6));
+console.log(list.remove(0));
+console.log(list.toString());
+console.log(list.remove(4));
+console.log(list.toString());
 
 function pushData(list) {
     list.push("Hello");

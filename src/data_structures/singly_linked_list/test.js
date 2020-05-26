@@ -36,6 +36,14 @@ console.log(list.get(1));
 console.log(list.get(0));
 console.log(list.get(-1));
 
+console.log("--- SET ---");
+console.log(list.set(0, "Welcome"));
+console.log(list.toString());
+console.log(list.set(-1, "Invalid"));
+console.log(list.set(3, "Invalid"));
+console.log(list.set(2, "!!!"));
+console.log(list.toString());
+
 function pushData(list) {
     list.push("Hello");
     list.push("linked");

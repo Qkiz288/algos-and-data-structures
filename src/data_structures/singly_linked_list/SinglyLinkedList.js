@@ -81,4 +81,13 @@ module.exports.SinglyLinkedList = class SinglyLinkedList {
         }
         return node;
     }
+
+    set(index, value) {
+        const node = this.get(index);
+        if (node) {
+            node.val = value;
+            return true;
+        }
+        return false;
+    }
 }

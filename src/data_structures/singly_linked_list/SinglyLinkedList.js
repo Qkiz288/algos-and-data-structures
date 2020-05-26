@@ -57,4 +57,15 @@ module.exports.SinglyLinkedList = class SinglyLinkedList {
         }
         return oldHead;
     }
+
+    unshift(value) {
+        const newHead = new Node(value);
+        newHead.next = this.head;
+        this.head = newHead;
+        this.length += 1;
+        if (this.length === 1) {
+            this.tail = this.head;
+        }
+        return this;
+    }
 }

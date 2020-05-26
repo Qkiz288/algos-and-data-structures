@@ -18,14 +18,16 @@ console.log(list.toString());
 
 console.log("--- SHIFT ---")
 pushData(list);
-console.log(list.shift());
+console.log(list.shift().toString());
+console.log(list.shift().toString());
+console.log(list.shift().toString());
+console.log(list.shift().toString());
 console.log(list.toString());
-console.log(list.shift());
-console.log(list.toString());
-console.log(list.shift());
-console.log(list.toString());
-console.log(list.shift());
-console.log(list.toString());
+
+console.log("--- UNSHIFT ---")
+console.log(list.unshift("!").toString());
+console.log(list.unshift("again").toString());
+console.log(list.unshift("Hello").toString());
 
 function pushData(list) {
     list.push("Hello");

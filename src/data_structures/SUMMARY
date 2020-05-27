@@ -1,0 +1,9 @@
+Data structures are collections of values, the relationship among them and the functions/operations tha can be applied to the data.
+Different data structures can excel in different situations and for different purposes.
+
+                        INSERTION     REMOVAL     SEARCHING   ACCESS
+Singly linked list        O(1)      O(1) / O(n)     O(n)       O(n)
+
+SINGLY LINKED LIST
++ Good choice when insertion and deletion at the beginning is frequently required
+- No indexes

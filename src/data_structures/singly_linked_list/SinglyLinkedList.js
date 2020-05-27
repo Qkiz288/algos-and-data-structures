@@ -125,4 +125,22 @@ module.exports.SinglyLinkedList = class SinglyLinkedList {
         this.length -= 1;
         return removedNode;
     }
+
+    reverse() {
+        const temp = this.head;
+        this.head = this.tail;
+        this.tail = temp;
+        
+        let next;
+        let prev = null;
+        let node = this.tail;
+        while (node) {
+            next = node.next;
+            node.next = prev;
+            prev = node;
+            node = next;
+        }
+        
+        return this;
+    }
 }

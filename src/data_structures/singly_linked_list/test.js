@@ -62,6 +62,9 @@ console.log(list.toString());
 console.log(list.remove(4));
 console.log(list.toString());
 
+console.log("--- REVERSE ---")
+console.log(list.reverse().toString());
+
 function pushData(list) {
     list.push("Hello");
     list.push("linked");

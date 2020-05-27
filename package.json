@@ -1,0 +1,22 @@
+{
+  "name": "algorithms-data-structures",
+  "version": "1.0.0",
+  "description": "Algorithm and data structures exercises",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Qkiz288/algos-and-data-structures.git"
+  },
+  "author": "Kamil Kukiełka",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Qkiz288/algos-and-data-structures/issues"
+  },
+  "homepage": "https://github.com/Qkiz288/algos-and-data-structures#readme",
+  "devDependencies": {
+    "jasmine": "^3.5.0"
+  }
+}

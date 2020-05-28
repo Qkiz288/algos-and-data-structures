@@ -21,4 +21,23 @@ module.exports.DoublyLinkedList = class DoublyLinkedList {
         this.length++;
         return this;
     }
+
+    pop() {
+        let popped;
+        if (this.length === 0) {
+            return undefined;
+        }
+        else if (this.length === 1) {
+            popped = this.head;
+            this.head = null;
+            this.tail = null;
+        } else {
+            popped = this.tail;
+            this.tail = this.tail.prev;
+            this.tail.next = null;
+            popped.prev = null;
+        }
+        this.length--;
+        return popped;
+    }
 }

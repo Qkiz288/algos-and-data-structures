@@ -92,9 +92,16 @@ module.exports.DoublyLinkedList = class DoublyLinkedList {
                 item = item.prev;
             }
         }
-        item.next = null;
-        item.prev = null;
 
         return item;
+    }
+
+    set(index, value) {
+        const item = this.get(index);
+        if (!item) {
+            return false;
+        }
+        item.val = value;
+        return true;
     }
 }

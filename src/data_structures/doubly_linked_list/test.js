@@ -246,8 +246,6 @@ describe("Doubly linked list tests", function() {
         // then
         expect(list.length).toBe(numOfItems);
         expect(item.val).toBe(list.head.val);
-        expect(item.next).toBe(null);
-        expect(item.prev).toBe(null);
     });
 
     it("Get item from first half", function() {
@@ -264,8 +262,6 @@ describe("Doubly linked list tests", function() {
         expect(list.length).toBe(numOfItems);
         expect(item).not.toBe(undefined);
         expect(item.val).toBe(expectedValue);
-        expect(item.next).toBe(null);
-        expect(item.prev).toBe(null);
     });
 
     it("Get last item", function() {
@@ -279,8 +275,6 @@ describe("Doubly linked list tests", function() {
         // then
         expect(list.length).toBe(numOfItems);
         expect(item.val).toBe(list.tail.val);
-        expect(item.next).toBe(null);
-        expect(item.prev).toBe(null);
     });
 
     it("Get item from second item", function() {
@@ -297,8 +291,74 @@ describe("Doubly linked list tests", function() {
         expect(list.length).toBe(numOfItems);
         expect(item).not.toBe(undefined);
         expect(item.val).toBe(expectedValue);
-        expect(item.next).toBe(null);
-        expect(item.prev).toBe(null);
+    });
+
+    it("Set on empty list", function() {
+        // given
+        const value1 = "A";
+
+        // when
+        const result1 = list.set(0, value1);
+
+        // then
+        expect(result1).toBe(false);
+    });
+
+    it("Invalid set", function() {
+        // given
+        const value1 = "A";
+        const value2 = "B";
+        const numOfItems = 2;
+        initialize(list, numOfItems);
+
+
+        // when
+        const result1 = list.set(-1, value1);
+        const result2 = list.set(numOfItems, value2);
+
+        // then
+        expect(result1).toBe(false);
+        expect(result2).toBe(false);
+    });
+
+    it("Set on 1 item list", function() {
+        // given
+        const value1 = "A";
+        const numOfItems = 1;
+        initialize(list, numOfItems);
+
+        // when
+        const result1 = list.set(0, value1);
+
+        // then
+        expect(result1).toBe(true);
+        expect(list.head).toEqual(list.tail);
+        expect(list.head.next).toBe(null);
+        expect(list.head.prev).toBe(null);
+        expect(list.tail.next).toBe(null);
+        expect(list.tail.prev).toBe(null);
+        expect(list.length).toBe(numOfItems);
+    });
+
+    it("Set on 2 item list", function() {
+        // given
+        const value1 = "A";
+        const value2 = "B";
+        const numOfItems = 2;
+        initialize(list, numOfItems);
+
+        // when
+        const result1 = list.set(0, value1);
+        const result2 = list.set(1, value2);
+
+        // then
+        expect(result1).toBe(true);
+        expect(result2).toBe(true);
+        expect(list.length).toBe(numOfItems);
+        expect(list.head.next).toEqual(list.tail);
+        expect(list.head.prev).toBe(null);
+        expect(list.tail.prev).toEqual(list.head);
+        expect(list.tail.next).toBe(null);
     });
 
 })

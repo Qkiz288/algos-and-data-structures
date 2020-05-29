@@ -183,6 +183,41 @@ describe("Doubly linked list tests", function() {
         expect(list.tail.prev).toBe(list.head);
     });
 
+    it("Unshift 1 item into empty", function() {
+        // given
+        const expectedValue = "A";
+
+        // when
+        list.unshift(expectedValue);
+
+        // then
+        expect(list.length).toBe(1);
+        expect(list.head.val).toBe(expectedValue);
+        expect(list.tail.val).toBe(expectedValue);
+        expect(list.head.prev).toBe(null);
+        expect(list.tail.next).toBe(null);
+        expect(list.head).toEqual(list.tail);
+    });
+
+    it("Unshift 2 items into empty", function() {
+        // given
+        const expectedValue1 = "A";
+        const expectedValue2 = "B";
+
+        // when
+        list.unshift(expectedValue1);
+        list.unshift(expectedValue2);
+
+        // then
+        expect(list.length).toBe(2);
+        expect(list.head.val).toBe(expectedValue2);
+        expect(list.tail.val).toBe(expectedValue1);
+        expect(list.head.prev).toBe(null);
+        expect(list.head.next).toBe(list.tail);
+        expect(list.tail.next).toBe(null);
+        expect(list.tail.prev).toBe(list.head);
+    });
+
 })
 
 function initialize(list, numOfItems) {

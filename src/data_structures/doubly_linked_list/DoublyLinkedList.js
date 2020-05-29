@@ -59,4 +59,17 @@ module.exports.DoublyLinkedList = class DoublyLinkedList {
         this.length--;
         return shifted;
     }
+
+    unshift(value) {
+        if (!this.head) {
+            this.push(value);
+        } else {
+            const oldHead = this.head;
+        this.head = new Node(value);
+        this.head.next = oldHead;
+        oldHead.prev = this.head;
+        this.length++;
+        }
+        return this;
+    }
 }

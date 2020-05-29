@@ -218,6 +218,89 @@ describe("Doubly linked list tests", function() {
         expect(list.tail.prev).toBe(list.head);
     });
 
+    it("Invalid get", function() {
+        // given
+        const numOfItems = 2;
+        initialize(list, numOfItems);
+        const invalidIndex1 = -1;
+        const invalidIndex2 = numOfItems;
+
+        // when
+        const item1 = list.get(invalidIndex1);
+        const item2 = list.get(invalidIndex2);
+
+        // then
+        expect(list.length).toBe(numOfItems);
+        expect(item1).toBe(undefined);
+        expect(item2).toBe(undefined);
+    });
+
+    it("Get first item", function() {
+        // given
+        const numOfItems = 9;
+        initialize(list, numOfItems);
+
+        // when
+        const item = list.get(0);
+
+        // then
+        expect(list.length).toBe(numOfItems);
+        expect(item.val).toBe(list.head.val);
+        expect(item.next).toBe(null);
+        expect(item.prev).toBe(null);
+    });
+
+    it("Get item from first half", function() {
+        // given
+        const numOfItems = 9;
+        initialize(list, numOfItems);
+        const firstHalfIndex = Math.floor(numOfItems / 4);
+        const expectedValue = firstHalfIndex;
+
+        // when
+        const item = list.get(firstHalfIndex);
+
+        // then
+        expect(list.length).toBe(numOfItems);
+        expect(item).not.toBe(undefined);
+        expect(item.val).toBe(expectedValue);
+        expect(item.next).toBe(null);
+        expect(item.prev).toBe(null);
+    });
+
+    it("Get last item", function() {
+        // given
+        const numOfItems = 9;
+        initialize(list, numOfItems);
+
+        // when
+        const item = list.get(numOfItems - 1);
+
+        // then
+        expect(list.length).toBe(numOfItems);
+        expect(item.val).toBe(list.tail.val);
+        expect(item.next).toBe(null);
+        expect(item.prev).toBe(null);
+    });
+
+    it("Get item from second item", function() {
+        // given
+        const numOfItems = 9;
+        initialize(list, numOfItems);
+        const secondHalfIndex = Math.floor(3 * numOfItems / 4);
+        const expectedValue = secondHalfIndex;
+
+        // when
+        const item = list.get(secondHalfIndex);
+
+        // then
+        expect(list.length).toBe(numOfItems);
+        expect(item).not.toBe(undefined);
+        expect(item.val).toBe(expectedValue);
+        expect(item.next).toBe(null);
+        expect(item.prev).toBe(null);
+    });
+
 })
 
 function initialize(list, numOfItems) {

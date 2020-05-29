@@ -91,6 +91,98 @@ describe("Doubly linked list tests", function() {
         expect(list.tail.next).toBe(null);
     });
 
+    it("Shift from empty empty", function() {
+        // given
+
+        // when
+        const shifted = list.shift();
+
+        // then
+        expect(shifted).toBe(undefined);
+        expect(list.length).toBe(0);
+        expect(list.head).toBe(null);
+        expect(list.tail).toBe(null);
+    });
+
+    it("Shift 1 item until empty", function() {
+        // given
+        const numOfItems = 1;
+        initialize(list, numOfItems);
+        const expectedVal = list.head.val;
+
+        // when
+        const shifted = list.shift();
+
+        // then
+        expect(shifted.val).toBe(expectedVal);
+        expect(shifted.next).toBe(null);
+        expect(shifted.prev).toBe(null);
+        expect(list.length).toBe(0);
+        expect(list.head).toBe(null);
+        expect(list.tail).toBe(null);
+    });
+
+    it("Shift 2 items until empty", function() {
+        // given
+        const numOfItems = 2;
+        initialize(list, numOfItems);
+        const expectedVal1 = list.head.val;
+        const expectedVal2 = list.tail.val;
+
+        // when
+        const shifted1 = list.shift();
+        const shifted2 = list.shift();
+
+        // then
+        expect(shifted1.val).toBe(expectedVal1);
+        expect(shifted1.next).toBe(null);
+        expect(shifted1.prev).toBe(null);
+        expect(shifted2.val).toBe(expectedVal2);
+        expect(shifted2.next).toBe(null);
+        expect(shifted2.prev).toBe(null);
+        expect(list.length).toBe(0);
+        expect(list.head).toBe(null);
+        expect(list.tail).toBe(null);
+    });
+
+    it("Shift until 1 item", function() {
+        // given
+        const numOfItems = 2;
+        initialize(list, numOfItems);
+        const expectedVal = list.head.val;
+
+        // when
+        const shifted = list.shift();
+
+        // then
+        expect(shifted.val).toBe(expectedVal);
+        expect(shifted.next).toBe(null);
+        expect(shifted.prev).toBe(null);
+        expect(list.length).toBe(1);
+        expect(list.head.prev).toBe(null);
+        expect(list.tail.next).toBe(null);
+    });
+
+    it("Shift until 2 items", function() {
+        // given
+        const numOfItems = 3;
+        initialize(list, numOfItems);
+        const expectedVal = list.head.val;
+
+        // when
+        const shifted = list.shift();
+
+        // then
+        expect(shifted.val).toBe(expectedVal);
+        expect(shifted.next).toBe(null);
+        expect(shifted.prev).toBe(null);
+        expect(list.length).toBe(2);
+        expect(list.head.prev).toBe(null);
+        expect(list.head.next).toBe(list.tail);
+        expect(list.tail.next).toBe(null);
+        expect(list.tail.prev).toBe(list.head);
+    });
+
 })
 
 function initialize(list, numOfItems) {

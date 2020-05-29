@@ -40,4 +40,23 @@ module.exports.DoublyLinkedList = class DoublyLinkedList {
         this.length--;
         return popped;
     }
+
+    shift() {
+        if (!this.head) {
+            return undefined;
+        } 
+        let shifted; 
+        if (this.length === 1) {
+            shifted = this.head;
+            this.head = null;
+            this.tail = null;
+        } else {
+            shifted = this.head;
+            this.head = this.head.next;
+            this.head.prev = null;
+        }
+        shifted.next = null;
+        this.length--;
+        return shifted;
+    }
 }

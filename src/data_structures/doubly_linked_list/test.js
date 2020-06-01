@@ -361,6 +361,102 @@ describe("Doubly linked list tests", function() {
         expect(list.tail.next).toBe(null);
     });
 
+    it("Invalid insert", function() {
+        // given
+        const numOfItems = 2;
+        initialize(list, numOfItems);
+        const value1 = "A";
+        const invalidIndex1 = -1;
+        const value2 = "B";
+        const invalidIndex2 = numOfItems + 1;
+        
+        // when
+        const result1 = list.insert(invalidIndex1, value1);
+        const result2 = list.insert(invalidIndex2, value2);
+
+        // then
+        expect(result1).toBe(false);
+        expect(result2).toBe(false);
+        expect(list.length).toBe(numOfItems);
+        expect(list.head.next).toEqual(list.tail);
+        expect(list.head.prev).toBe(null);
+        expect(list.tail.prev).toEqual(list.head);
+        expect(list.tail.next).toBe(null);
+    });
+
+    it("Insert on the head", function() {
+        // given
+        const numOfItems = 2;
+        initialize(list, numOfItems);
+        const value1 = "A";
+        const index = 0;
+        const oldHeadVal = list.head.val;
+        
+        // when
+        const result1 = list.insert(index, value1);
+
+        // then
+        expect(result1).toBe(true);
+        expect(list.length).toBe(numOfItems + 1);
+        expect(list.head.prev).toBe(null);
+        expect(list.head.val).toBe(value1);
+        expect(list.head.next.val).toBe(oldHeadVal);
+    });
+
+    it("Insert after the tail", function() {
+        // given
+        const numOfItems = 2;
+        initialize(list, numOfItems);
+        const value1 = "A";
+        const index = numOfItems;
+        const oldTailVal = list.tail.val;
+        
+        // when
+        const result1 = list.insert(index, value1);
+
+        // then
+        expect(result1).toBe(true);
+        expect(list.length).toBe(numOfItems + 1);
+        expect(list.tail.val).toBe(value1);
+        expect(list.tail.next).toBe(null);
+        expect(list.tail.prev.val).toBe(oldTailVal);
+    });
+
+    it("Insert on the tail", function() {
+        // given
+        const numOfItems = 2;
+        initialize(list, numOfItems);
+        const value1 = "A";
+        const index = numOfItems - 1;
+        const tailVal = list.tail.val;
+        
+        // when
+        const result1 = list.insert(index, value1);
+
+        // then
+        expect(result1).toBe(true);
+        expect(list.length).toBe(numOfItems + 1);
+        expect(list.tail.val).toBe(tailVal);
+        expect(list.tail.prev.val).toBe(value1);
+        expect(list.tail.next).toBe(null);
+    });
+
+    it("Insert after the head", function() {
+        // given
+        const numOfItems = 2;
+        initialize(list, numOfItems);
+        const value1 = "A";
+        const index = 1;
+        
+        // when
+        const result1 = list.insert(index, value1);
+
+        // then
+        expect(result1).toBe(true);
+        expect(list.length).toBe(numOfItems + 1);
+        expect(list.head.next.val).toBe(value1);
+    });
+
 })
 
 function initialize(list, numOfItems) {

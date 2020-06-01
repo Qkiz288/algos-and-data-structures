@@ -104,4 +104,25 @@ module.exports.DoublyLinkedList = class DoublyLinkedList {
         item.val = value;
         return true;
     }
+
+    insert(index, value) {
+        if (index < 0 || index > this.length) {
+            return false;
+        }
+        if (index === 0) {
+            return !!this.unshift(value);
+        }
+        if (index === this.length) {
+            return !!this.push(value);
+        }
+        const oldNode = this.get(index);
+        const previousNode = this.get(index - 1);
+        const newNode = new Node(value);
+        oldNode.prev = newNode;
+        previousNode.next = newNode;
+        newNode.next = oldNode;
+        newNode.prev = previousNode;
+        this.length++;
+        return true;
+    }
 }

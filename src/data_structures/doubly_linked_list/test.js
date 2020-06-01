@@ -526,6 +526,70 @@ describe("Doubly linked list tests", function() {
         expect(list.length).toBe(numOfItems - 1);
     });
 
+    it("Reverse empty", function() {
+        // given
+        
+        // when
+        list.reverse();
+
+        // then
+        expect(list.length).toBe(0);
+        expect(list.head).toBe(null);
+        expect(list.tail).toBe(null);
+    });
+
+    it("Reverse 1 item", function() {
+        // given
+        const numOfItems = 1;
+        initialize(list, numOfItems);
+        
+        // when
+        const reversed = list.reverse();
+
+        // then
+        expect(list.length).toBe(numOfItems);
+        expect(list.head).toEqual(list.tail);
+    });
+
+    it("Reverse 2 items", function() {
+        // given
+        const numOfItems = 2;
+        initialize(list, numOfItems);
+        const oldHeadVal = list.head.val;
+        const oldTailVal = list.tail.val;
+        
+        // when
+        const reversed = list.reverse();
+
+        // then
+        expect(list.length).toBe(numOfItems);
+        expect(list.head.val).toBe(oldTailVal);
+        expect(list.tail.val).toBe(oldHeadVal);
+        expect(list.head.next).toEqual(list.tail);
+        expect(list.tail.prev).toEqual(list.head);
+    });
+
+    it("Reverse multiple items", function() {
+        // given
+        const numOfItems = 9;
+        initialize(list, numOfItems);
+        const oldHeadVal = list.head.val;
+        const oldTailVal = list.tail.val;
+        
+        // when
+        list.reverse();
+
+        // then
+        expect(list.length).toBe(numOfItems);
+        expect(list.head.val).toBe(oldTailVal);
+        expect(list.tail.val).toBe(oldHeadVal);
+        expect(list.head.val).toBe(oldTailVal);
+        expect(list.tail.val).toBe(oldHeadVal);
+        expect(list.head.prev).toBe(null);
+        expect(list.head.next).not.toBe(null);
+        expect(list.tail.prev).not.toBe(null);
+    });
+
 })
 
 function initialize(list, numOfItems) {

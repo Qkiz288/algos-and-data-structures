@@ -146,4 +146,32 @@ module.exports.DoublyLinkedList = class DoublyLinkedList {
         nodeToRemove.prev = null;
         return nodeToRemove;
     }
+
+    reverse() {
+        if (this.length <= 1) {
+            return this;
+        }
+        else if (this.length === 2) {
+            const temp = this.head;
+            this.head = this.tail;
+            this.tail = temp;
+            this.head.next = this.head.prev;
+            this.tail.prev = this.tail.next;
+        } else {
+            const oldHead = this.head;
+            this.head = this.tail;
+            this.tail = oldHead;
+            let node = this.head;
+            while (node) {
+                const temp = node.prev;
+                node.prev = node.next;
+                node.next = temp;
+                node = temp;
+            }
+            
+        }
+        this.head.prev = null;
+        this.tail.next = null;
+        return this;
+    }
 }

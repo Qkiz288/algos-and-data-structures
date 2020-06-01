@@ -457,6 +457,75 @@ describe("Doubly linked list tests", function() {
         expect(list.head.next.val).toBe(value1);
     });
 
+    it("Invalid remove", function() {
+        // given
+        const numOfItems = 2;
+        initialize(list, numOfItems);
+        const invalidIndex1 = -1;
+        const invalidIndex2 = numOfItems;
+        
+        // when
+        const result1 = list.remove(invalidIndex1);
+        const result2 = list.remove(invalidIndex2);
+
+        // then
+        expect(result1).toBe(undefined);
+        expect(result2).toBe(undefined);
+        expect(list.length).toBe(numOfItems);
+    });
+
+    it("Remove from the head", function() {
+        // given
+        const numOfItems = 2;
+        initialize(list, numOfItems);
+        const expectedVal = list.head.val;
+        const expectedNewHeadVal = list.head.next.val;
+        
+        // when
+        const result1 = list.remove(0);
+
+        // then
+        expect(result1.val).toBe(expectedVal);
+        expect(result1.next).toBe(null);
+        expect(result1.prev).toBe(null);
+        expect(list.length).toBe(numOfItems - 1);
+        expect(list.head.val).toBe(expectedNewHeadVal);
+    });
+
+    it("Remove from the tail", function() {
+        // given
+        const numOfItems = 2;
+        initialize(list, numOfItems);
+        const expectedVal = list.tail.val;
+        const expectedNewTailVal = list.tail.prev.val;
+        
+        // when
+        const result1 = list.remove(numOfItems - 1);
+
+        // then
+        expect(result1.val).toBe(expectedVal);
+        expect(result1.next).toBe(null);
+        expect(result1.prev).toBe(null);
+        expect(list.length).toBe(numOfItems - 1);
+        expect(list.head.val).toBe(expectedNewTailVal);
+    });
+
+    it("Remove from the middle", function() {
+        // given
+        const numOfItems = 9;
+        initialize(list, numOfItems);
+        const index = Math.floor(numOfItems / 2);
+        
+        // when
+        const result1 = list.remove(index);
+
+        // then
+        expect(result1).toBeTruthy();
+        expect(result1.next).toBe(null);
+        expect(result1.prev).toBe(null);
+        expect(list.length).toBe(numOfItems - 1);
+    });
+
 })
 
 function initialize(list, numOfItems) {

@@ -4,6 +4,7 @@ Different data structures can excel in different situations and for different pu
                         INSERTION     REMOVAL     SEARCHING   ACCESS
 Singly linked list        O(1)      O(1) / O(n)     O(n)       O(n)
 Doubly linked list        O(1)         O(1)         O(n)       O(n)
+Stack                     O(1)         O(1)         O(n)       O(n)
 
 SINGLY LINKED LIST
 + Good choice when insertion and deletion at the beginning is frequently required
@@ -13,3 +14,6 @@ DOUBLY LINKED LIST
 + Removing is always constant time
 + Faster in finding nodes (comparing to Singly linked list)
 - Takes more memory due to extra 'prev' pointer
+
+STACK
++ Fast insertion/removal (from the beginning of the stack)

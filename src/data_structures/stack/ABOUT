@@ -1,0 +1,13 @@
+Stack implementation uses linked list. Array is not efficient due to O(n) time complexity when inserting
+in the beginning of the array (reindexing all following items).
+Stacks supposed to be O(1) when calling push() / pop()
+Stacks are LIFO data structure used for functions invocations (call stack), for operations like undo/redo, for routing (back/forward)
+
+
+                     first
+    --- PUSH -->    "Item 3"    --- POP -->
+                        |
+                    "Item 2"
+                        |
+                     last
+                    "Item 1" 

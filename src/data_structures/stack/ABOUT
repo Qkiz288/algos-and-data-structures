@@ -1,0 +1,12 @@
+Stack implementation uses linked list. Array is not efficient due to O(n) time complexity when inserting
+in the beginning of the array (reindexing all following items).
+Stacks supposed to be O(n) when calling push() / pop()
+
+
+                     first
+    --- PUSH -->    "Item 3"    --- POP -->
+                        |
+                    "Item 2"
+                        |
+                     last
+                    "Item 1" 

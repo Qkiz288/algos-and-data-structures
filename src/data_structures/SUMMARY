@@ -5,6 +5,7 @@ Different data structures can excel in different situations and for different pu
 Singly linked list        O(1)      O(1) / O(n)     O(n)       O(n)
 Doubly linked list        O(1)         O(1)         O(n)       O(n)
 Stack                     O(1)         O(1)         O(n)       O(n)
+QUEUE                     O(1)         O(1)         O(n)       O(n)
 
 SINGLY LINKED LIST
 + Good choice when insertion and deletion at the beginning is frequently required
@@ -17,3 +18,6 @@ DOUBLY LINKED LIST
 
 STACK
 + Fast insertion/removal (from the beginning of the stack)
+
+QUEUE
++ Fast insertion/removal

@@ -1,0 +1,13 @@
+Queue implementation uses linked list. Array is not efficient due to O(n) time complexity when inserting
+in the beginning of the array (reindexing all following items).
+Queues supposed to be O(1) when calling enqueue() / dequeue()
+Queues are FIFO data structure used for scheduling tasks in order etc.
+
+
+                     tail
+--- ENQUEUE -->     "Item 3"
+                        |
+                    "Item 2"
+                        |
+                     head
+                    "Item 1"    --- DEQUEUE -->

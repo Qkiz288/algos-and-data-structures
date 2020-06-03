@@ -1,0 +1,11 @@
+In binary search trees, every node can have max 2 nodes.
+Every node to the left of a parent node is always less than the parent
+Every node to the right of a parent node is always greater than the parent
+
+                10
+        ________|________
+        |               |
+        6               15
+    ____|___            |___
+    |      |               |
+    3      8               20

@@ -1,0 +1,24 @@
+Tree data structure consist of following elements:
+- root - the top node in a Tree
+- child - node directly conneted to another node when moving away from the root
+- parent - node directly connected to another node when moving to the root
+- siblings - group of nodes with the same parent
+- leaf - a node with no children
+- edge - connection betweeen one node and another
+
+                          2 root & parent
+            _____edge_____|_____edge______
+            |                            |
+            12    children & siblings    8 leaf
+       _____|_____
+       |         |
+       2 leaf    1 leaf
+
+Tree usage:
+- HTML DOM
+- Network routing
+- Abstract Syntax trees
+- Artificial intelligence
+- Folders in operating system
+- Computer File Systems
+- JSON

@@ -108,4 +108,89 @@ let tree;
         expect(tree.root.count).toBe(2);
         expect(tree.root.left.left.count).toBe(2);
     });
+
+    it("Find in empty tree", function() {
+        // given
+        const searchVal = 10;
+
+        // when
+        const result = tree.find(searchVal);
+
+        // then
+        expect(result).toBe(false);
+    });
+
+    it("True find in tree with duplicates", function() {
+        // given
+        initializeWithDuplicates(tree);
+        const searchVal1 = 10;
+        const searchVal2 = 6;
+        const searchVal3 = 15;
+        const searchVal4 = 3;
+        const searchVal5 = 8;
+        const searchVal6 = 20;
+
+        // when
+        const result1 = tree.find(searchVal1);
+        const result2 = tree.find(searchVal2);
+        const result3 = tree.find(searchVal3);
+        const result4 = tree.find(searchVal4);
+        const result5 = tree.find(searchVal5);
+        const result6 = tree.find(searchVal6);
+
+        // then
+        expect(result1).toBe(true);
+        expect(result2).toBe(true);
+        expect(result3).toBe(true);
+        expect(result4).toBe(true);
+        expect(result5).toBe(true);
+        expect(result6).toBe(true);
+    });
+
+    it("False find in tree with duplicates", function() {
+        // given
+        initializeWithDuplicates(tree);
+        const searchVal1 = 11;
+        const searchVal2 = 7;
+        const searchVal3 = 16;
+        const searchVal4 = 4;
+        const searchVal5 = 9;
+        const searchVal6 = 21;
+
+        // when
+        const result1 = tree.find(searchVal1);
+        const result2 = tree.find(searchVal2);
+        const result3 = tree.find(searchVal3);
+        const result4 = tree.find(searchVal4);
+        const result5 = tree.find(searchVal5);
+        const result6 = tree.find(searchVal6);
+
+        // then
+        expect(result1).toBe(false);
+        expect(result2).toBe(false);
+        expect(result3).toBe(false);
+        expect(result4).toBe(false);
+        expect(result5).toBe(false);
+        expect(result6).toBe(false);
+    });
 });
+
+function initializeWithDuplicates(tree) {
+    // given
+    const value1 = 10;
+    const value2 = 6;
+    const value3 = 15;
+    const value4 = 3;
+    const value5 = 8;
+    const value6 = 20;
+
+    // when
+    tree.insert(value1);
+    tree.insert(value2);
+    tree.insert(value3);
+    tree.insert(value4);
+    tree.insert(value5);
+    tree.insert(value6);
+    tree.insert(value1);
+    tree.insert(value4);
+}

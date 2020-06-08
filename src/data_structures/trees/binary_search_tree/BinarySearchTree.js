@@ -7,14 +7,10 @@ module.exports.BinarySearchTree = class BinarySearchTree {
 
     insert(value, currentNode = this.root) {
         const node = new Node(value);
-        // let greater;
         if (!this.root) {
             this.root = node;
             return this;
         } 
-        // else {
-        //     greater = value >= currentNode.value ? true : false;
-        // }
         if (value > currentNode.value) {
             if (currentNode.right) {
                 this.insert(value, currentNode.right);
@@ -29,6 +25,19 @@ module.exports.BinarySearchTree = class BinarySearchTree {
             }
         } else {
             currentNode.count++;
+        }
+    }
+
+    find(value, currentNode = this.root) {
+        if (!currentNode) {
+            return false;
+        }
+        if (value > currentNode.value) {
+            return this.find(value, currentNode.right);
+        } else if (value < currentNode.value) {
+            return this.find(value, currentNode.left);
+        } else {
+            return true;
         }
     }
 }

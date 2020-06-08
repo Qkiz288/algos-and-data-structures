@@ -5,7 +5,8 @@ Different data structures can excel in different situations and for different pu
 Singly linked list        O(1)      O(1) / O(n)     O(n)       O(n)
 Doubly linked list        O(1)         O(1)         O(n)       O(n)
 Stack                     O(1)         O(1)         O(n)       O(n)
-QUEUE                     O(1)         O(1)         O(n)       O(n)
+Queue                     O(1)         O(1)         O(n)       O(n)
+Binary Search Tree        O(log(n))                 O(log(n))
 
 SINGLY LINKED LIST
 + Good choice when insertion and deletion at the beginning is frequently required
@@ -21,3 +22,6 @@ STACK
 
 QUEUE
 + Fast insertion/removal
+
+BINARY SEARCH TREE
++ Doubling the number of nodes -> only +1 step to find/insert

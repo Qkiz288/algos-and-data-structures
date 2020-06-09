@@ -9,3 +9,14 @@ Every node to the right of a parent node is always greater than the parent
     ____|___            |___
     |      |               |
     3      8               20
+
+Breadth First Search is looking horizontally at the nodes when searching for a value.
+It checks every node only once.
+
+  --->              10
+            ________|________
+            |               |
+  ---->     6               15
+        ____|___            |___
+        |      |               |
+  ----> 3      8               20

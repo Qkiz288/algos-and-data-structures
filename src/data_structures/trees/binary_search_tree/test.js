@@ -173,6 +173,18 @@ let tree;
         expect(result5).toBe(false);
         expect(result6).toBe(false);
     });
+
+    it("Breadth First Search test", function() {
+        // given
+        initializeWithDuplicates(tree);
+
+        // when
+        const result = tree.breadthFirstSearch();
+
+        // then
+        expect(result.length).toBe(6);
+        expect(result).toEqual([10, 6, 15, 3, 8, 20]);
+    });
 });
 
 function initializeWithDuplicates(tree) {

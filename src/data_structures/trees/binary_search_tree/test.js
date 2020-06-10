@@ -185,6 +185,18 @@ let tree;
         expect(result.length).toBe(6);
         expect(result).toEqual([10, 6, 15, 3, 8, 20]);
     });
+
+    it("Depth First Search Pre Order test", function() {
+        // given
+        initializeWithDuplicates(tree);
+
+        // when
+        const result = tree.depthFirstSearchPreOrder();
+
+        // then
+        expect(result.length).toBe(6);
+        expect(result).toEqual([10, 6, 3, 8, 15, 20]);
+    });
 });
 
 function initializeWithDuplicates(tree) {

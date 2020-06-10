@@ -20,3 +20,14 @@ It checks every node only once.
         ____|___            |___
         |      |               |
   ----> 3      8               20
+
+Depth First Search Pre Order is looking vertically (starting at the top) at the nodes when searching for a value.
+It checks every node only once.
+
+                (1) 10
+            ________|________
+            |               |
+        (2) 6           (5) 15
+        ____|___            |___
+        |      |               |
+    (3) 3  (4) 8           (6) 20

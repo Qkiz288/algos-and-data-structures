@@ -83,4 +83,17 @@ module.exports.BinarySearchTree = class BinarySearchTree {
         
         return visited;
     }
+
+    depthFirstSearchInOrder(node = this.root) {
+        if (!node) {
+            return [];
+        }
+
+        let visited = [];
+        visited = visited.concat(this.depthFirstSearchInOrder(node.left));
+        visited.push(node.value);
+        visited = visited.concat(this.depthFirstSearchInOrder(node.right));
+        
+        return visited;
+    }
 }

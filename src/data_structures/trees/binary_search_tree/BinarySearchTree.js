@@ -70,4 +70,17 @@ module.exports.BinarySearchTree = class BinarySearchTree {
         
         return visited;
     }
+
+    depthFirstSearchPostOrder(node = this.root) {
+        if (!node) {
+            return [];
+        }
+
+        let visited = [];
+        visited = visited.concat(this.depthFirstSearchPostOrder(node.left));
+        visited = visited.concat(this.depthFirstSearchPostOrder(node.right));
+        visited.push(node.value);
+        
+        return visited;
+    }
 }

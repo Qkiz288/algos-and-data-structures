@@ -20,3 +20,36 @@ It checks every node only once.
         ____|___            |___
         |      |               |
   ----> 3      8               20
+
+Depth First Search Pre Order is looking vertically (starting at the top) at the nodes when searching for a value.
+It checks every node only once.
+
+                (1) 10
+            ________|________
+            |               |
+        (2) 6           (5) 15
+        ____|___            |___
+        |      |               |
+    (3) 3  (4) 8           (6) 20
+
+Depth First Search Post Order is looking vertically (starting at the bottom left) at the nodes when searching for a value.
+First it checks all child nodes of a node. It checks every node only once.
+
+                (6) 10
+            ________|________
+            |               |
+        (3) 6           (5) 15
+        ____|___            |___
+        |      |               |
+    (1) 3  (2) 8           (4) 20
+
+Depth First Search In Order is looking vertically (starting at the bottom left) at the nodes when searching for a value.
+It checks left child first, then parent and then right child node. It checks every node only once.
+
+                (4) 10
+            ________|________
+            |               |
+        (2) 6           (5) 15
+        ____|___            |___
+        |      |               |
+    (1) 3  (3) 8           (6) 20

@@ -57,4 +57,43 @@ module.exports.BinarySearchTree = class BinarySearchTree {
         }
         return visited;
     }
+
+    depthFirstSearchPreOrder(node = this.root) {
+        if (!node) {
+            return [];
+        }
+        let visited = [];
+        visited.push(node.value);
+        
+        visited = visited.concat(this.depthFirstSearchPreOrder(node.left));
+        visited = visited.concat(this.depthFirstSearchPreOrder(node.right));
+        
+        return visited;
+    }
+
+    depthFirstSearchPostOrder(node = this.root) {
+        if (!node) {
+            return [];
+        }
+
+        let visited = [];
+        visited = visited.concat(this.depthFirstSearchPostOrder(node.left));
+        visited = visited.concat(this.depthFirstSearchPostOrder(node.right));
+        visited.push(node.value);
+        
+        return visited;
+    }
+
+    depthFirstSearchInOrder(node = this.root) {
+        if (!node) {
+            return [];
+        }
+
+        let visited = [];
+        visited = visited.concat(this.depthFirstSearchInOrder(node.left));
+        visited.push(node.value);
+        visited = visited.concat(this.depthFirstSearchInOrder(node.right));
+        
+        return visited;
+    }
 }

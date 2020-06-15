@@ -185,6 +185,42 @@ let tree;
         expect(result.length).toBe(6);
         expect(result).toEqual([10, 6, 15, 3, 8, 20]);
     });
+
+    it("Depth First Search Pre Order test", function() {
+        // given
+        initializeWithDuplicates(tree);
+
+        // when
+        const result = tree.depthFirstSearchPreOrder();
+
+        // then
+        expect(result.length).toBe(6);
+        expect(result).toEqual([10, 6, 3, 8, 15, 20]);
+    });
+
+    it("Depth First Search Post Order test", function() {
+        // given
+        initializeWithDuplicates(tree);
+
+        // when
+        const result = tree.depthFirstSearchPostOrder();
+
+        // then
+        expect(result.length).toBe(6);
+        expect(result).toEqual([3, 8, 6, 20, 15, 10]);
+    });
+
+    it("Depth First Search In Order test", function() {
+        // given
+        initializeWithDuplicates(tree);
+
+        // when
+        const result = tree.depthFirstSearchInOrder();
+
+        // then
+        expect(result.length).toBe(6);
+        expect(result).toEqual([3, 6, 8, 10, 15, 20]);
+    });
 });
 
 function initializeWithDuplicates(tree) {

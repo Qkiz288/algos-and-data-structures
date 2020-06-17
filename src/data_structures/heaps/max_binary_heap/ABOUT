@@ -1,0 +1,9 @@
+Heap is a tree-like structure but it's different than a tree data structure because it follows different rules.
+In Max Binary Heap parent node is always greater than it's child nodes (child nodes order is random)
+
+                100
+        19              36
+    17      3        25     1
+  2    7
+
+Binary Heaps are used to implement Priority Queues

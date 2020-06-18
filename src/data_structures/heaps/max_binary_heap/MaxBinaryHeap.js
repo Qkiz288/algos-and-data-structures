@@ -8,11 +8,28 @@ module.exports.MaxBinaryHeap = class MaxBinaryHeap {
         this.bubbleUp();
     }
 
+    extractMax() {
+        this.swap(0, this.values.length - 1);
+        const extracted = this.values.pop();
+        this.bubbleDown();
+        return extracted;
+    }
+
     bubbleUp(index = this.values.length - 1) {
         const parentIndex = this.parentIndex(index);
         if (this.values[index] > this.values[parentIndex]) {
             this.swap(index, parentIndex);
             this.bubbleUp(parentIndex);
+        }
+    }
+
+    bubbleDown(index = 0) {
+        const leftChildIndex = this.leftChildIndex(index);
+        const rightChildIndex = this.rightChildIndex(index);
+        const largerChildIndex = this.values[leftChildIndex] > this.values[rightChildIndex] ? leftChildIndex : rightChildIndex;
+        if (this.values[index] < this.values[largerChildIndex]) {
+            this.swap(index, largerChildIndex);
+            this.bubbleDown(largerChildIndex);
         }
     }
 

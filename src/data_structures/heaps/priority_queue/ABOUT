@@ -1,0 +1,7 @@
+Priority queue is a tree-like data structure where items in the queue are placed
+in such manner, that items with highest/lowest priority are at the top of the queue and served first.
+
+
+                BOBBY (priority 1)
+        
+        LUKE (priority 5)       Lisa (priority 15)

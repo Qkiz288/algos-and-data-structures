@@ -7,6 +7,7 @@ Doubly linked list        O(1)         O(1)         O(n)       O(n)
 Stack                     O(1)         O(1)         O(n)       O(n)
 Queue                     O(1)         O(1)         O(n)       O(n)
 Binary Search Tree        O(log(n))                 O(log(n))
+Binary Heap               O(log(n))    O(log(n))    O(n)
 
 SINGLY LINKED LIST
 + Good choice when insertion and deletion at the beginning is frequently required
@@ -25,3 +26,6 @@ QUEUE
 
 BINARY SEARCH TREE
 + Doubling the number of nodes -> only +1 step to find/insert
+
+BINARY HEAP
++ Useful for sorting and implementing other data structures (priority queues)

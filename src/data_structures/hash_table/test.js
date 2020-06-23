@@ -1,4 +1,5 @@
 const hash = require('./Hash').hash;
+const HashTable = require('./HashTable').HashTable;
 
 describe("Hash-related tests", function() {
 
@@ -24,6 +25,48 @@ describe("Hash-related tests", function() {
             })
         );
         
+    });
+
+    describe("HashTable tests", function() {
+
+        let hashTable;
+
+        beforeEach(function() {
+            hashTable = new HashTable();
+        });
+
+        it("Set 2 values at separate indexes", function() {
+            // given
+            const key1 = "Tester";
+            const value1 = "Kamil";
+            const key2 = "Developer";
+            const value2 = "John";
+
+            // when
+            hashTable.set(key1, value1);
+            hashTable.set(key2, value2);
+            
+            // then
+            expect(hashTable.keyMap[hashTable.hash(key1)])
+                .not.toEqual(hashTable.keyMap[hashTable.hash(key2)]);
+        });
+        
+        it("Set 2 values at the same index", function() {
+            // given
+            const key1 = "Tester";
+            const value1 = "Kamil";
+            const key2 = "Tester";
+            const value2 = "John";
+
+            // when
+            hashTable.set(key1, value1);
+            hashTable.set(key2, value2);
+
+            // then
+            expect(hashTable.keyMap[hashTable.hash(key1)])
+                .toEqual(hashTable.keyMap[hashTable.hash(key2)]);
+        });
+
     });
 
 });

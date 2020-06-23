@@ -15,6 +15,8 @@ module.exports.HashTable = class HashTable {
         const entry = new Entry(key, value);
         if (!this.keyMap[hashedKey]) {
             this.keyMap[hashedKey] = new Array();
+        } else if (this.containsKey(key)) {
+            this.removeKey(key);
         }
         this.keyMap[hashedKey].push(entry);
     }
@@ -25,12 +27,38 @@ module.exports.HashTable = class HashTable {
         if (!bucket) {
             return undefined;
         }
-        return bucket.find(entry => entry.key === key);
+        return bucket.find(entry => entry.key === key).value;
     }
 
     containsKey(key) {
         const hashedKey = this.hash(key);
         const result = this.keyMap[hashedKey].filter(entry => entry.key === key);
-        return result > 0;
+        return result.length > 0;
+    }
+
+    removeKey(key) {
+        const hashedKey = this.hash(key);
+        const index = this.keyMap[hashedKey].findIndex(entry => entry.key === key);
+        this.keyMap[hashedKey].splice(index, 1);
+    }
+
+    keys() {
+        const keys = [];
+        this.keyMap.forEach(bucket => {
+            if (bucket) {
+                bucket.forEach(entry => keys.push(entry.key));
+            }
+        });
+        return keys;
+    }
+
+    values() {
+        const values = [];
+        this.keyMap.forEach(bucket => {
+            if (bucket) {
+                bucket.forEach(entry => values.push(entry.value));
+            }
+        });
+        return values;
     }
 }

@@ -51,9 +51,9 @@ describe("Hash-related tests", function() {
                 .not.toEqual(hashTable.keyMap[hashTable.hash(key2)]);
         });
         
-        it("Set 2 values at the same index", function() {
+        it("Set 2 different keys at the same index", function() {
             // given
-            const key1 = "Tester";
+            const key1 = "Tester10";
             const value1 = "Kamil";
             const key2 = "Tester";
             const value2 = "John";
@@ -65,6 +65,20 @@ describe("Hash-related tests", function() {
             // then
             expect(hashTable.keyMap[hashTable.hash(key1)])
                 .toEqual(hashTable.keyMap[hashTable.hash(key2)]);
+        });
+
+        it("Update key with new value", function() {
+            // given
+            const key = "Tester";
+            const value1 = "Kamil";
+            const value2 = "John";
+
+            // when
+            hashTable.set(key, value1);
+            hashTable.set(key, value2);
+
+            // then
+            expect(hashTable.keyMap[hashTable.hash(key)][0].value).toBe(value2);
         });
 
         it("Invalid get", function() {
@@ -89,8 +103,51 @@ describe("Hash-related tests", function() {
 
             // then
             expect(result).not.toBe(undefined);
-            expect(result.key).toBe(givenKey);
-            expect(result.value).toBe(givenValue);
+            expect(result).toBe(givenValue);
+        });
+
+        it("Get all keys from hashTable", function() {
+            // given
+            const key1 = "Tester10";
+            const value1 = "Kamil";
+            const key2 = "Tester";
+            const value2 = "John";
+            const key3 = "Director";
+            const value3 = "Director";
+            hashTable.set(key1, value1);
+            hashTable.set(key2, value2);
+            hashTable.set(key3, value3);
+
+            // when
+            const result = hashTable.keys();
+
+            // then
+            expect(result.length).toBe(3);
+            expect(result).toContain(key1);
+            expect(result).toContain(key2);
+            expect(result).toContain(key3);
+        });
+
+        it("Get all values from hashTable", function() {
+            // given
+            const key1 = "Tester10";
+            const value1 = "Kamil";
+            const key2 = "Tester";
+            const value2 = "John";
+            const key3 = "Director";
+            const value3 = "Kamil";
+            hashTable.set(key1, value1);
+            hashTable.set(key2, value2);
+            hashTable.set(key3, value3);
+
+            // when
+            const result = hashTable.values();
+
+            // then
+            expect(result.length).toBe(3);
+            expect(result).toContain(value1);
+            expect(result).toContain(value2);
+            expect(result).toContain(value3);
         });
 
     });

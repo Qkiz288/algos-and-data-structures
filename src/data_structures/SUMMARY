@@ -8,6 +8,7 @@ Stack                     O(1)         O(1)         O(n)       O(n)
 Queue                     O(1)         O(1)         O(n)       O(n)
 Binary Search Tree        O(log(n))                 O(log(n))
 Binary Heap               O(log(n))    O(log(n))    O(n)
+Hash Table                O(1)         O(1)                    O(1)
 
 SINGLY LINKED LIST
 + Good choice when insertion and deletion at the beginning is frequently required
@@ -29,3 +30,7 @@ BINARY SEARCH TREE
 
 BINARY HEAP
 + Useful for sorting and implementing other data structures (priority queues)
+
+HASH TABLE
++ Finds value by key very fast
++ Adds new key-value pairs quickly

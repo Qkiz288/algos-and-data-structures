@@ -67,6 +67,32 @@ describe("Hash-related tests", function() {
                 .toEqual(hashTable.keyMap[hashTable.hash(key2)]);
         });
 
+        it("Invalid get", function() {
+            // given
+            const key = "Manager";
+
+            // when
+            const result = hashTable.get(key);
+
+            // then
+           expect(result).toBe(undefined);
+        });
+
+        it("Valid get", function() {
+            // given
+            const givenKey = "Tester";
+            const givenValue = "Kamil";
+            hashTable.set(givenKey, givenValue);
+
+            // when
+            const result = hashTable.get(givenKey);
+
+            // then
+            expect(result).not.toBe(undefined);
+            expect(result.key).toBe(givenKey);
+            expect(result.value).toBe(givenValue);
+        });
+
     });
 
 });

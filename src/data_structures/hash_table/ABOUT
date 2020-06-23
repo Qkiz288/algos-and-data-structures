@@ -1,0 +1,27 @@
+HASH TABLE
+Data structure which holds data in key-value pairs. Key is hashed (using hashing function) 
+producing index. Then key-value pair is put in hash table's underlaying list (e.g. array) using that index.
+Different keys can be hashed to the same value (index) - it is necessary to create a sublist
+of key-value pairs under one index (Separate Chaining - see below).
+
+HASHING FUNCTION
+Good hashing function should be:
+ - fast
+ - distribute keys uniformly
+ - be deterministic
+Usage of prime numbers in hashing function exteremely decreases the probability of collisions.
+In case of collisions, 2 solutions are possible:
+    - Separate Chaining - at each index in our array, we store values using a more sophisticated
+    data structure (array, linked list etc.)
+
+    [ index1,   index2,     index3,     index4,     index5 ]
+                               ^
+                      [["darkblue", "00008b"],
+                      ["salmon", "fa8072"]]
+
+    - Linear Probing - when collision is found, next empty slot is used
+
+    [ index1,   index2,     index3,                 index4,     index5 ]
+                               ^                       ^
+                      ["darkblue", "00008b"]   ["salmon", "fa8072"]
+                      

@@ -29,21 +29,44 @@ module.exports.UndirectedGraph = class UndirectedGraph {
             .filter(v => v !== vertex1);
     }
 
-    // Depth First Search
-    traverseDFS(vertex, visited = []) {
+    // recursive Depth First Search
+    recursiveTraverseDFS(vertex, visited = {}) {
         if (!this.adjacencyList[vertex]) {
             return [];
         }
         let result = [];
 
         result.push(vertex);
-        visited.push(vertex);
+        visited[vertex] = true;
 
         for (const neighbor of this.adjacencyList[vertex]) {
-            if (!visited.includes(neighbor)) {
-                result = result.concat(this.traverseDFS(neighbor, visited));
+            if (!visited[neighbor]) {
+                result = result.concat(this.recursiveTraverseDFS(neighbor, visited));
             }
         }
+        return result;
+    }
+
+    // iterative Depth First Search
+    iterativeTraverseDFS(vertex) {
+        const stack = [];
+        const result = [];
+        const visited = {};
+        let currentVertex;
+
+        stack.push(vertex);
+        visited[vertex] = true;
+        while (stack.length > 0) {
+            currentVertex = stack.pop();
+            result.push(currentVertex);
+            this.adjacencyList[currentVertex].forEach(neighbor => {
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    stack.push(neighbor);
+                }
+            });
+        }
+
         return result;
     }
 }

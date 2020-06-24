@@ -68,4 +68,26 @@ describe("Undirected Graph tests", function() {
         expect(graph.adjacencyList[vertex3]).toContain(vertex2);
     });
 
+    it("Remove vertex", function() {
+        // given
+        const vertex1 = "A";
+        const vertex2 = "B";
+        const vertex3 = "C";
+        graph.addVertex(vertex1);
+        graph.addVertex(vertex2);
+        graph.addVertex(vertex3);
+        graph.addEdge(vertex1, vertex2);
+        graph.addEdge(vertex1, vertex3);
+        graph.addEdge(vertex2, vertex3);
+
+        // when
+        graph.removeVertex(vertex1);
+
+        // then
+        expect(graph.adjacencyList[vertex2]).not.toContain(vertex1);
+        expect(graph.adjacencyList[vertex2]).toContain(vertex3);
+        expect(graph.adjacencyList[vertex3]).not.toContain(vertex1);
+        expect(graph.adjacencyList[vertex3]).toContain(vertex2);
+    });
+
 });

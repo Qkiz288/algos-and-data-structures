@@ -9,6 +9,14 @@ module.exports.UndirectedGraph = class UndirectedGraph {
         }
     }
 
+    removeVertex(vertex) {
+        const adjacentVertexList = this.adjacencyList[vertex];
+        for (const v of adjacentVertexList) {
+            this.removeEdge(v, vertex);
+        }
+        delete this.adjacencyList[vertex]
+    }
+
     addEdge(vertex1, vertex2) {
         this.adjacencyList[vertex1].push(vertex2);
         this.adjacencyList[vertex2].push(vertex1);

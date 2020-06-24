@@ -1,0 +1,48 @@
+ A graph is a pictorial representation of a set of objects (vertices) where some pairs of objects are connected by links (edges)
+
+DEFINITIONS
+Vertex - a node
+Edge - connection between nodes
+
+TYPES OF GRAPHS
+ - weighted/unweighted undirected graph
+ - weighted/unweighted directed graph
+
+To represent a graph, 2 methods can be used:
+ - adjacency matrix
+
+          A --- B               A B C D E
+         /        \    -->    A 0 1 0 0 1
+       E --- D --- C          B 1 0 1 0 0
+                              C 0 1 0 1 0
+                              D 0 0 1 0 1
+                              E 1 0 0 1 0
+
+ - adjacency list (for above graph)
+{
+    A: ["B", "E"],
+    B: ["A", "C"],
+    C: ["B", "D"],
+    D: ["C", "E"],
+    E: ["A", "D"],
+}
+
+BIG O DIFFERENCES
+|V| - number of vertices
+|E| - number of edges
+
+OPERATION       ADJACENCY LIST      ADJACENCY MATRIX
+Add vertex          O(1)                O(|V^2|)
+add edge            O(1)                O(1)
+remove vertex    O(|V| + |E|)           O(|V^2|)
+remove edge         O(|E|)              O(1)
+query            O(|V| + |E|)           O(1)
+storage          O(|V| + |E|)           O(|V^2|)
+
+Adjacency List              vs      Adjacency Matrix
++ can take up less space            - takes up more space
+  (sparse graphs)                     (sparse graphs)
++ faster to iterate                 - slower to iterate
+  over all edges                      over all edges
+- can be slower to lookup           + faster to lookup
+  specific edge                       specific edge

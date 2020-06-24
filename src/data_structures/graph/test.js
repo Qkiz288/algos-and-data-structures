@@ -90,4 +90,48 @@ describe("Undirected Graph tests", function() {
         expect(graph.adjacencyList[vertex3]).toContain(vertex2);
     });
 
+    it("Circular graph traverse", function() {
+        // given
+        graph.addVertex("A");
+        graph.addVertex("B");
+        graph.addVertex("C");
+        graph.addVertex("D");
+        graph.addVertex("E");
+        graph.addVertex("F");
+        graph.addEdge("A", "B");
+        graph.addEdge("A", "C");
+        graph.addEdge("B", "D");
+        graph.addEdge("C", "E");
+        graph.addEdge("D", "E");
+        graph.addEdge("D", "F");
+        graph.addEdge("E", "F");
+
+        // when
+        const result = graph.traverseDFS("A");
+
+        // then
+        expect(result).toEqual(["A", "B", "D", "E", "C", "F"]);
+    });
+
+    it("Non-circular graph traverse", function() {
+        // given
+        graph.addVertex("A");
+        graph.addVertex("B");
+        graph.addVertex("C");
+        graph.addVertex("D");
+        graph.addVertex("E");
+        graph.addVertex("F");
+        graph.addEdge("A", "B");
+        graph.addEdge("B", "C");
+        graph.addEdge("B", "D");
+        graph.addEdge("A", "E");
+        graph.addEdge("E", "F");
+
+        // when
+        const result = graph.traverseDFS("A");
+
+        // then
+        expect(result).toEqual(["A", "B", "C", "D", "E", "F"]);
+    });
+
 });

@@ -28,4 +28,22 @@ module.exports.UndirectedGraph = class UndirectedGraph {
         this.adjacencyList[vertex2] = this.adjacencyList[vertex2]
             .filter(v => v !== vertex1);
     }
+
+    // Depth First Search
+    traverseDFS(vertex, visited = []) {
+        if (!this.adjacencyList[vertex]) {
+            return [];
+        }
+        let result = [];
+
+        result.push(vertex);
+        visited.push(vertex);
+
+        for (const neighbor of this.adjacencyList[vertex]) {
+            if (!visited.includes(neighbor)) {
+                result = result.concat(this.traverseDFS(neighbor, visited));
+            }
+        }
+        return result;
+    }
 }

@@ -31,4 +31,19 @@ describe("Undirected Graph tests", function() {
         expect(graph.adjacencyList[vertex]).toEqual([]);
     });
 
+    it("Add edge", function() {
+        // given
+        const vertex1 = "A";
+        const vertex2 = "B";
+        graph.addVertex(vertex1);
+        graph.addVertex(vertex2);
+
+        // when
+        graph.addEdge(vertex1, vertex2);
+
+        // then
+        expect(graph.adjacencyList[vertex1]).toContain(vertex2);
+        expect(graph.adjacencyList[vertex2]).toContain(vertex1);
+    });
+
 });

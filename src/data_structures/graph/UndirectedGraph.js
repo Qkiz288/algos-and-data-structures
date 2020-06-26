@@ -69,4 +69,26 @@ module.exports.UndirectedGraph = class UndirectedGraph {
 
         return result;
     }
+
+    // iterative Breadh First Search
+    iterativeraverseBFS(vertex) {
+        const queue = [vertex];
+        const result = [];
+        const visited = {};
+        let currentVertex;
+
+        visited[vertex] = true;
+        while (queue.length > 0) {
+            currentVertex = queue.shift();
+            result.push(currentVertex);
+            this.adjacencyList[currentVertex].forEach(neighbor => {
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    queue.push(neighbor);
+                }
+            });
+        }
+
+        return result;
+    }
 }

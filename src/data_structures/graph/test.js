@@ -90,7 +90,7 @@ describe("Undirected Graph tests", function() {
         expect(graph.adjacencyList[vertex3]).toContain(vertex2);
     });
 
-    it("Circular graph traverse (recursive)", function() {
+    it("Circular DFS graph traverse (recursive)", function() {
         // given
         graph.addVertex("A");
         graph.addVertex("B");
@@ -113,7 +113,7 @@ describe("Undirected Graph tests", function() {
         expect(result).toEqual(["A", "B", "D", "E", "C", "F"]);
     });
 
-    it("Non-circular graph traverse (recursive)", function() {
+    it("Non-circular DFS graph traverse (recursive)", function() {
         // given
         graph.addVertex("A");
         graph.addVertex("B");
@@ -134,7 +134,7 @@ describe("Undirected Graph tests", function() {
         expect(result).toEqual(["A", "B", "C", "D", "E", "F"]);
     });
 
-    it("Circular graph traverse (iterative)", function() {
+    it("Circular DFS graph traverse (iterative)", function() {
         // given
         graph.addVertex("A");
         graph.addVertex("B");
@@ -157,7 +157,7 @@ describe("Undirected Graph tests", function() {
         expect(result).toEqual(["A", "C", "E", "F", "D", "B"]);
     });
 
-    it("Non-circular graph traverse (iterative)", function() {
+    it("Non-circular DFS graph traverse (iterative)", function() {
         // given
         graph.addVertex("A");
         graph.addVertex("B");
@@ -176,6 +176,30 @@ describe("Undirected Graph tests", function() {
 
         // then
         expect(result).toEqual(["A", "E", "F", "B", "D", "C"]);
+    });
+
+    it("Circular BFS graph traverse (iterative)", function() {
+        // given
+        graph.addVertex("A");
+        graph.addVertex("B");
+        graph.addVertex("C");
+        graph.addVertex("D");
+        graph.addVertex("E");
+        graph.addVertex("F");
+        graph.addEdge("A", "B");
+        graph.addEdge("A", "E");
+        graph.addEdge("B", "C");
+        graph.addEdge("B", "D");
+        graph.addEdge("C", "D");
+        graph.addEdge("D", "E");
+        graph.addEdge("D", "F");
+        graph.addEdge("E", "F");
+
+        // when
+        const result = graph.iterativeraverseBFS("A");
+
+        // then
+        expect(result).toEqual(["A", "B", "E", "C", "D", "F"]);
     });
 
 });

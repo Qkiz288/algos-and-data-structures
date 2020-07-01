@@ -1,10 +1,10 @@
 // MEMOIZATION APPROACH
-// recursive solution has one drawback = it can throw StackOverflow - it has worse space complexity
-module.exports.fibonacciRecursive = function fibonacciRecursive(value, memo = []) {
+// recursive solution has one drawback = it can throw StackOverflowError - it has worse space complexity
+module.exports.fibonacciMemoization= function fibonacciMemoization(value, memo = []) {
     if (memo[value]) return memo[value];
     if (value === 0) return 0;
     if (value === 1) return 1;
-    memo[value] = fibonacciRecursive(value - 1, memo) + fibonacciRecursive(value - 2, memo);
+    memo[value] = fibonacciMemoization(value - 1, memo) + fibonacciMemoization(value - 2, memo);
     return memo[value];
 }
 

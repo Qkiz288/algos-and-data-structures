@@ -1,4 +1,4 @@
-const fibonacciRecursive = require('./Fibonacci').fibonacciRecursive;
+const fibonacciMemoization = require('./Fibonacci').fibonacciMemoization;
 const fibonacciTabulation = require('./Fibonacci').fibonacciTabulation;
 
 describe("Fibonacci sequence test with Dynamic Programming paradigm", function() {
@@ -18,7 +18,7 @@ describe("Fibonacci sequence test with Dynamic Programming paradigm", function()
  .forEach(testData => 
     it(`Should return ${testData.expected} for input = ${testData.input}`, function() {
         // when
-        const resultRecursive = fibonacciRecursive(testData.input);
+        const resultRecursive = fibonacciMemoization(testData.input);
         const resultTabulation = fibonacciTabulation(testData.input);
     
         //then

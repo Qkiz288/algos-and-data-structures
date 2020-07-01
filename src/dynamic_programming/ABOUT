@@ -23,6 +23,10 @@ Calculating 4th item of Fibbonacci sequence involves calculating Fib(2) 2 times,
 Results of those repeatable subproblems can be stored in a lookup table and accesses when needed
 by other subproblems.
 
+    Solutions of subproblems can be stored in 2 ways:
+        - Memoization - uses recursion to store solutions - has worse space complexity
+        - Tabulation - uses array to store solutions
+
 OPTIMAL SUBSTRUCTURE
 A problem has an optimal substructure property if an optimal solution of the given problem 
 can be obtained by using the optimal solution of its subproblems. 

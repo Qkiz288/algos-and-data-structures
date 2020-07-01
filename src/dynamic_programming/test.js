@@ -1,4 +1,5 @@
-const fibonacci = require('./Fibonacci').fibonacci;
+const fibonacciRecursive = require('./Fibonacci').fibonacciRecursive;
+const fibonacciTabulation = require('./Fibonacci').fibonacciTabulation;
 
 describe("Fibonacci sequence test with Dynamic Programming paradigm", function() {
 
@@ -17,10 +18,12 @@ describe("Fibonacci sequence test with Dynamic Programming paradigm", function()
  .forEach(testData => 
     it(`Should return ${testData.expected} for input = ${testData.input}`, function() {
         // when
-        const result = fibonacci(testData.input);
+        const resultRecursive = fibonacciRecursive(testData.input);
+        const resultTabulation = fibonacciTabulation(testData.input);
     
         //then
-        expect(result).toBe(testData.expected);
+        expect(resultRecursive).toBe(testData.expected);
+        expect(resultTabulation).toBe(testData.expected);
     }));
 
 

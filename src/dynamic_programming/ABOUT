@@ -1,0 +1,52 @@
+DEFINITION
+
+Dynamic Programming is a method for solving a complex problem by breaking it down 
+into a collection of simpler subproblems, solving each of those subproblems just once, 
+and storing their solutions using a memory-based data structure (array, map,etc).
+
+REQUIRED CHARACTERISTICS
+    1. Overlapping subproblems
+    2. Optimal substructure
+
+OVERLAPPING SUBPROBLEMS
+Exmple of Fibbonacci sequence:
+
+                    Fib(4)
+                 /         \
+           Fib(3)            Fib(2)
+         /       \         /        \
+    Fib(2)      Fib(1)  Fib(1)      Fib(0)
+   /     \
+Fib(1)    Fib(0)
+
+Calculating 4th item of Fibbonacci sequence involves calculating Fib(2) 2 times, Fib(1) 3 times etc.
+Results of those repeatable subproblems can be stored in a lookup table and accesses when needed
+by other subproblems.
+
+    Solutions of subproblems can be stored in 2 ways:
+        - Memoization - uses recursion to store solutions - has worse space complexity
+        - Tabulation - uses array to store solutions
+
+OPTIMAL SUBSTRUCTURE
+A problem has an optimal substructure property if an optimal solution of the given problem 
+can be obtained by using the optimal solution of its subproblems. 
+
+Shortest path example:
+
+     A -2- B       D
+           |  \    |
+           2   3   1
+           |    \  |
+           E  -2-  C
+
+Shortest path from A to D is A-B-C-D.
+Optimal solution of A to C subproblem is A-B-C
+Optimal solution of A to B subproblem is A-B
+So the path from A to D ihas optimal substructure (can be built from optimal solutions of subproblems)
+
+Example when optimal substructure might not work:
+Cheapest (optimal) flight from A to B:
+A -> C -> B
+you would think that path from A to C is optimal. But it isn't. Optimal path to get from A to C is through D:
+A -> D -> C
+So solution A -> C -> D is not composed of optimal solutions of it's subproblems.

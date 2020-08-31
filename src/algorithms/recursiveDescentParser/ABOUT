@@ -1,0 +1,17 @@
+RECURSIVE DESCENT PARSER
+Top-Down approach and start breaking the expression into smaller pieces in recursive way. 
+In order to build a proper parser, grammar of the expressions is needed to be defined.
+Working with tokens instead of raw string is a good practice when implementing a parser.
+
+1. Grammar
+Expression := {Operator} Number {Operator Number}
+Operator   := "+" | "-"
+Number     := Digit{Digit}
+Digit      := "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+
+[] - optional
+{} - repeated 0 or more times
+
+2. Tokens
+Token classes are simple marker classes with almost no functionality inside except 
+for the NumberConstantToken which has to hold the actual value.

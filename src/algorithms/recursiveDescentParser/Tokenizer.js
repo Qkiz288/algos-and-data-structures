@@ -1,24 +1,35 @@
 const NumberToken = require('./tokens/NumberToken').NumberToken;
 const PlusToken = require('./tokens/PlusToken').PlusToken;
 const MinusToken = require('./tokens/MinusToken').MinusToken;
+const MultiplicationToken = require('./tokens/MultiplicationToken').MultiplicationToken;
+const OpeningBracketToken = require('./tokens/OpeningBracketToken').OpeningBracketToken;
+const ClosingBracketToken = require('./tokens/ClosingBracketToken').ClosingBracketToken;
 
 module.exports.Tokenizer = class Tokenizer {
     constructor(expression) {
         this.tokens = this.tokenize(expression);
-        this.currIdx = 0;
-    }
-
-    moveForward() {
-        this.currIdx += 1;
-    }
-
-    getNext() {
-        this.currIdx += 1;
-        return this.tokens[this.currIdx];
+        this.currentIndex = -1;
     }
 
     getCurrent() {
-        return this.tokens[this.currIdx];
+        return this.tokens[this.currentIndex];
+    }
+
+    areThereMoreTokens() {
+        return this.currentIndex < this.tokens.length;
+    }
+
+    getNext() {
+        this.currentIndex = this.currentIndex + 1;
+        return this.tokens[this.currentIndex];
+    }
+
+    peekNext() {
+        return this.tokens[this.currentIndex + 1];
+    }
+
+    isNextOfType(type) {
+        return this.peekNext() instanceof type;
     }
 
     tokenize(expression) {
@@ -38,6 +49,26 @@ module.exports.Tokenizer = class Tokenizer {
             else if (char === "-") {
                 const minusToken = new MinusToken();
                 tokens.push(minusToken);
+            }
+
+            else if (char === "*") {
+                const multiplicationToken = new MultiplicationToken();
+                tokens.push(multiplicationToken);
+            }
+
+            else if (char === "/") {
+                const divisionToken = new DivisionToken();
+                tokens.push(divisionToken);
+            }
+
+            else if (char === "(") {
+                const openingBracketToken = new OpeningBracketToken();
+                tokens.push(divisionToken);
+            }
+
+            else if (char === ")") {
+                const closingBracketToken = new ClosingBracketToken();
+                tokens.push(closingBracketToken);
             }
 
             else {

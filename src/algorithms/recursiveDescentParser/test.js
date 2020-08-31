@@ -17,7 +17,7 @@ describe("Recursive Descent Parser tests", function() {
                 mathParser = new MathParser(expression);
 
                 // when
-                const result = mathParser.parse(expression)
+                const result = mathParser.parseExpression()
 
                 // then
                 expect(result).toEqual(testData.expectedResult);
@@ -43,7 +43,7 @@ describe("Recursive Descent Parser tests", function() {
                 mathParser = new MathParser(expression);
         
                 // when
-                const result = mathParser.parse(expression)
+                const result = mathParser.parseExpression()
         
                 // then
                 expect(result).toEqual(testData.expectedResult);
@@ -77,7 +77,7 @@ describe("Recursive Descent Parser tests", function() {
                 mathParser = new MathParser(expression);
 
                 // when
-                const result = mathParser.parse();
+                const result = mathParser.parseExpression();
             
                 // then
                 expect(result).toEqual(testData.expectedResult);

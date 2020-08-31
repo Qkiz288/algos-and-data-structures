@@ -4,9 +4,10 @@ In order to build a proper parser, grammar of the expressions is needed to be de
 Working with tokens instead of raw string is a good practice when implementing a parser.
 
 1. Grammar
-Expression := {Operator} Number {Operator Number}
-Operator   := "+" | "-"
-Number     := Digit{Digit}
+Expression := [ "-" ] Term { ("+" | "-") Term }
+Term       := Factor { ( "*" | "/" ) Factor }
+Factor     := RealNumber | "(" Expression ")"
+RealNumber := Digit{Digit}
 Digit      := "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
 
 [] - optional

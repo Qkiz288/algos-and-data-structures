@@ -11,13 +11,13 @@ describe("Recursive Descent Parser tests", function() {
         {num1: 0, num2: 0, operator: "+", expectedResult: 0},
     ]
         .forEach(testData => 
-            it("Valid two numbers expression", function() {
+            it("Valid two numbers addition/subtraction expression", function() {
                 // given
                 const expression = `${testData.num1}${testData.operator}${testData.num2}`;
                 mathParser = new MathParser(expression);
 
                 // when
-                const result = mathParser.parseExpression()
+                const result = mathParser.parseExpression();
 
                 // then
                 expect(result).toEqual(testData.expectedResult);
@@ -37,7 +37,7 @@ describe("Recursive Descent Parser tests", function() {
         {num1: -1, num2: 2, num3: 3, operator1: "-", operator2: "+", expectedResult: 0}
     ]
         .forEach(testData => 
-            it("Valid three numbers expression", function() {
+            it("Valid three numbers addition/subtraction expression", function() {
                 // given
                 const expression = `${testData.num1}${testData.operator1}${testData.num2}${testData.operator2}${testData.num3}`;
                 mathParser = new MathParser(expression);
@@ -71,7 +71,7 @@ describe("Recursive Descent Parser tests", function() {
         {num1: 0, num2: 0, num3: 0, num4: 0, operator1: "-", operator2: "-", operator3: "-", expectedResult: 0},
     ]
         .forEach(testData => 
-            it("Valid four numbers expression", function() {
+            it("Valid four numbers addition/subtraction expression", function() {
                 // given
                 const expression = `${testData.num1}${testData.operator1}${testData.num2}${testData.operator2}${testData.num3}${testData.operator3}${testData.num4}`;
                 mathParser = new MathParser(expression);
@@ -83,5 +83,23 @@ describe("Recursive Descent Parser tests", function() {
                 expect(result).toEqual(testData.expectedResult);
                 }) 
             );
+
+    [
+        {num1: 1, num2: 2, operator: "*", expectedResult: 2},   
+        {num1: 10, num2: 2, operator: "*", expectedResult: 20}    
+    ]
+        .forEach(testData => 
+            it("Valid two numbers multiplication expression", function() {
+                // given
+                const expression = `${testData.num1}${testData.operator}${testData.num2}`;
+                mathParser = new MathParser(expression);
+        
+                // when
+                const result = mathParser.parseExpression();
+        
+                // then
+                expect(result).toEqual(testData.expectedResult);
+            })
+        );
 
 });

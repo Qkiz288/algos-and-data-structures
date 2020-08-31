@@ -37,7 +37,7 @@ module.exports.MathParser = class MathParser {
 
     // Term := Factor { ( "*" | "/" ) Factor }
     parseTerm() {
-        const totalValue = this.parseFactor();
+        let totalValue = this.parseFactor();
         while (this.nextIsMultiplicationOrDivision()) {
             const operand = this.tokenizer.getNext();
             const nextFactor = this.parseFactor();
@@ -98,9 +98,16 @@ module.exports.MathParser = class MathParser {
 
     parseNumber() {
         const token = this.tokenizer.getNext();
-        if (token instanceof NumberToken) {
-            return token.value;
+        if (!(token instanceof NumberToken)) {
+            throw new Error(`Expected a number but found: ${token}`);
         }
-        throw new Error(`Expected a number but found: ${token}`);
+        const digits = [];
+        digits.push(token.value);
+        while (this.nextIsDigit()) {
+            const nextToken = this.tokenizer.getNext();
+            digits.push(nextToken.value);
+        }
+        const number = digits.join("");
+        return +number;
     }
 }

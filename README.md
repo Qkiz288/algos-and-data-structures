@@ -9,6 +9,8 @@ Stack: Javascript, Jasmine, Node.js
   - Dijkstra
   - mergeSortedArrays
   - pivotHelper
+  - recursiveDescentParser
+    - MathParser
   - search
     - binarySearch
     - linearSearch

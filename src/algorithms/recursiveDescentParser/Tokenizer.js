@@ -5,6 +5,7 @@ const MultiplicationToken = require('./tokens/MultiplicationToken').Multiplicati
 const DivisionToken = require('./tokens/DivisionToken').DivisionToken;
 const OpeningBracketToken = require('./tokens/OpeningBracketToken').OpeningBracketToken;
 const ClosingBracketToken = require('./tokens/ClosingBracketToken').ClosingBracketToken;
+const DotToken = require('./tokens/DotToken').DotToken;
 
 module.exports.Tokenizer = class Tokenizer {
     constructor(expression) {
@@ -70,6 +71,11 @@ module.exports.Tokenizer = class Tokenizer {
             else if (char === ")") {
                 const closingBracketToken = new ClosingBracketToken();
                 tokens.push(closingBracketToken);
+            }
+
+            else if (char === ".") {
+                const dotToken = new DotToken(".");
+                tokens.push(dotToken);
             }
 
             else {

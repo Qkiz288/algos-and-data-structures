@@ -7,6 +7,7 @@ const DivisionToken = require('./tokens/DivisionToken').DivisionToken;
 const OpeningBracketToken = require('./tokens/OpeningBracketToken').OpeningBracketToken;
 const ClosingBracketToken = require('./tokens/ClosingBracketToken').ClosingBracketToken;
 const NumberToken = require('./tokens/NumberToken').NumberToken;
+const DotToken = require('./tokens/DotToken').DotToken;
 
 module.exports.MathParser = class MathParser {
     constructor(expression) {
@@ -85,8 +86,11 @@ module.exports.MathParser = class MathParser {
     }
 
     nextIsDigit() {
-        const result = this.tokenizer.isNextOfType(NumberToken);
-        return result;
+        return this.tokenizer.isNextOfType(NumberToken);
+    }
+
+    nextIsDot() {
+        return this.tokenizer.isNextOfType(DotToken);
     }
 
     nextIsOpeningBracket() {
@@ -104,7 +108,7 @@ module.exports.MathParser = class MathParser {
         }
         const digits = [];
         digits.push(token.value);
-        while (this.nextIsDigit()) {
+        while (this.nextIsDigit() || this.nextIsDot()) {
             const nextToken = this.tokenizer.getNext();
             digits.push(nextToken.value);
         }

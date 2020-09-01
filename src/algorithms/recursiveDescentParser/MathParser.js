@@ -8,6 +8,7 @@ const OpeningBracketToken = require('./tokens/OpeningBracketToken').OpeningBrack
 const ClosingBracketToken = require('./tokens/ClosingBracketToken').ClosingBracketToken;
 const NumberToken = require('./tokens/NumberToken').NumberToken;
 const DotToken = require('./tokens/DotToken').DotToken;
+const CaretToken = require('./tokens/CaretToken').CaretToken;
 
 module.exports.MathParser = class MathParser {
     constructor(expression) {
@@ -52,10 +53,17 @@ module.exports.MathParser = class MathParser {
         return totalValue;
     }
 
-    // Factor := RealNumber | "(" Expression ")"
+    // Factor := RealNumber [ "^" "(" Factor ")" ] | "(" Expression ")"
     parseFactor() {
         if (this.nextIsDigit()) {
-            const number = this.parseNumber();
+            let number = this.parseNumber();
+
+            if (this.nextIsCaret()) {
+                this.tokenizer.getNext();
+                const caretExpression = this.parseFactor();
+                number = Math.pow(number, caretExpression);
+            }
+
             return number;
         }
 
@@ -99,6 +107,10 @@ module.exports.MathParser = class MathParser {
 
     nextIsClosingBracket() {
         return this.tokenizer.isNextOfType(ClosingBracketToken);
+    }
+
+    nextIsCaret() {
+        return this.tokenizer.isNextOfType(CaretToken);
     }
 
     parseNumber() {

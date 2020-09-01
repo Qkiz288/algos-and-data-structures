@@ -6,8 +6,8 @@ Working with tokens instead of raw string is a good practice when implementing a
 1. Grammar
 Expression := [ "-" ] Term { ("+" | "-") Term }
 Term       := Factor { ( "*" | "/" ) Factor }
-Factor     := RealNumber | "(" Expression ")"
-RealNumber := Digit{Digit}
+Factor     := RealNumber [ "^" "(" Factor ")" ] | "(" Expression ")"
+RealNumber := Digit{Digit} [ "." Digit{Digit} ]
 Digit      := "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
 
 [] - optional

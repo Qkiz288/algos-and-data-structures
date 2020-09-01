@@ -6,6 +6,7 @@ const DivisionToken = require('./tokens/DivisionToken').DivisionToken;
 const OpeningBracketToken = require('./tokens/OpeningBracketToken').OpeningBracketToken;
 const ClosingBracketToken = require('./tokens/ClosingBracketToken').ClosingBracketToken;
 const DotToken = require('./tokens/DotToken').DotToken;
+const CaretToken = require('./tokens/CaretToken').CaretToken;
 
 module.exports.Tokenizer = class Tokenizer {
     constructor(expression) {
@@ -77,6 +78,11 @@ module.exports.Tokenizer = class Tokenizer {
                 const dotToken = new DotToken(".");
                 tokens.push(dotToken);
             }
+
+            else if (char === "^") {
+                const caretToken = new CaretToken();
+                tokens.push(caretToken);
+            } 
 
             else {
                 throw Error(`Unknown token: ${char}`);

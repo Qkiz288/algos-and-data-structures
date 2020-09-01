@@ -1,5 +1,5 @@
 module.exports.singlePlusMinusOperationData = [
-    {num1: 1.2, num2: 2, operator: "+", expectedResult: 3.2},
+    {num1: 1.25, num2: 2, operator: "+", expectedResult: 3.25},
     {num1: 10.5, num2: 2, operator: "+", expectedResult: 12.5},
     {num1: 1, num2: 20, operator: "+", expectedResult: 21},
     {num1: -1, num2: 2, operator: "+", expectedResult: 1},
@@ -191,4 +191,15 @@ module.exports.parenthesisOperationData = [
     {expression: "-1*(0.5+2.5)-2*(1+2)", expectedResult: -9},
     {expression: "-1*(0.5+2.5)*2*(1+2)", expectedResult: -18},
     {expression: "-1*(0.5+2.5)/2*(1+2)", expectedResult: -4.5},
+];
+
+module.exports.caretOperationData = [
+    {expression: "2^2", expectedResult: 4},
+    {expression: "2^(-2)", expectedResult: 0.25},
+    {expression: "2^(2^2)", expectedResult: 16},
+    {expression: "2^(1+2)+2", expectedResult: 10},
+    {expression: "2^(1-2)*2", expectedResult: 1},
+    {expression: "2^(2*2)-2", expectedResult: 14},
+    {expression: "4^(1/2)/2", expectedResult: 1},
+    {expression: "1+3*2-2^2*0", expectedResult: 7}
 ];

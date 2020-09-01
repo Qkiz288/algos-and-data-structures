@@ -6,6 +6,7 @@ const singleMultiplyDivideOperationData = require('./testData').singleMultiplyDi
 const doubleMultiplyDivideOperationData = require('./testData').doubleMultiplyDivideOperationData;
 const doubleMixedOperationData = require('./testData').doubleMixedOperationData;
 const parenthesisOperationData = require('./testData').parenthesisOperationData;
+const caretOperationData = require('./testData').caretOperationData;
 
 describe("Recursive Descent Parser tests", function() {
 
@@ -99,6 +100,20 @@ describe("Recursive Descent Parser tests", function() {
 
     parenthesisOperationData.forEach(testData => 
         it(`Valid expression with parenthesis = ${testData.expression}`, function() {
+            // given
+            const expression = testData.expression;
+            mathParser = new MathParser(expression);
+        
+            // when
+            const result = mathParser.parseExpression();
+        
+            // then
+            expect(result).toEqual(testData.expectedResult);
+        })
+    );
+
+    caretOperationData.forEach(testData => 
+        it(`Valid expression with caret = ${testData.expression}`, function() {
             // given
             const expression = testData.expression;
             mathParser = new MathParser(expression);

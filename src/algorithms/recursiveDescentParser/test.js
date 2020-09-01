@@ -1,87 +1,129 @@
 const MathParser = require('./MathParser').MathParser;
+const singlePlusMinusOperationData = require('./testData').singlePlusMinusOperationData;
+const doublePlusMinusOperationData = require('./testData').doublePlusMinusOperationData;
+const triplePlusMinusOperationData = require('./testData').triplePlusMinusOperationData;
+const singleMultiplyDivideOperationData = require('./testData').singleMultiplyDivideOperationData;
+const doubleMultiplyDivideOperationData = require('./testData').doubleMultiplyDivideOperationData;
+const doubleMixedOperationData = require('./testData').doubleMixedOperationData;
+const parenthesisOperationData = require('./testData').parenthesisOperationData;
+const caretOperationData = require('./testData').caretOperationData;
 
 describe("Recursive Descent Parser tests", function() {
 
-    [
-        {num1: 1, num2: 2, operator: "+", expectedResult: 3},
-        {num1: -1, num2: 2, operator: "+", expectedResult: 1},
-        {num1: 1, num2: 2, operator: "-", expectedResult: -1},
-        {num1: -1, num2: 2, operator: "-", expectedResult: -3},
-        {num1: 0, num2: 0, operator: "-", expectedResult: 0},
-        {num1: 0, num2: 0, operator: "+", expectedResult: 0},
-    ]
-        .forEach(testData => 
-            it("Valid two numbers expression", function() {
-                // given
-                const expression = `${testData.num1}${testData.operator}${testData.num2}`;
-                mathParser = new MathParser(expression);
-
-                // when
-                const result = mathParser.parse(expression)
-
-                // then
-                expect(result).toEqual(testData.expectedResult);
-            })
-        );
     
-    [
-        {num1: 1, num2: 2, num3: 3, operator1: "+", operator2: "+", expectedResult: 6},
-        {num1: -1, num2: 2, num3: 3, operator1: "+", operator2: "+", expectedResult: 4},
-        {num1: 1, num2: 2, num3: 3, operator1: "-", operator2: "-", expectedResult: -4},
-        {num1: -1, num2: 2, num3: 3, operator1: "-", operator2: "-", expectedResult: -6},
-        {num1: 0, num2: 0, num3: 0, operator1: "-", operator2: "-", expectedResult: 0},
-        {num1: 0, num2: 0, num3: 0, operator1: "+", operator2: "+", expectedResult: 0},
-        {num1: 1, num2: 2, num3: 3, operator1: "+", operator2: "-", expectedResult: 0},
-        {num1: -1, num2: 2, num3: 3, operator1: "+", operator2: "-", expectedResult: -2},
-        {num1: 1, num2: 2, num3: 3, operator1: "-", operator2: "+", expectedResult: 2},
-        {num1: -1, num2: 2, num3: 3, operator1: "-", operator2: "+", expectedResult: 0}
-    ]
-        .forEach(testData => 
-            it("Valid three numbers expression", function() {
-                // given
-                const expression = `${testData.num1}${testData.operator1}${testData.num2}${testData.operator2}${testData.num3}`;
-                mathParser = new MathParser(expression);
+    singlePlusMinusOperationData.forEach(testData => 
+        it("Valid two numbers addition/subtraction expression", function() {
+            // given
+            const expression = `${testData.num1}${testData.operator}${testData.num2}`;
+            mathParser = new MathParser(expression);
+
+            // when
+            const result = mathParser.parseExpression();
+
+            // then
+            expect(result).toEqual(testData.expectedResult);
+        })
+    );
+    
+    
+    doublePlusMinusOperationData.forEach(testData => 
+        it("Valid three numbers addition/subtraction expression", function() {
+            // given
+            const expression = `${testData.num1}${testData.operator1}${testData.num2}${testData.operator2}${testData.num3}`;
+            mathParser = new MathParser(expression);
         
-                // when
-                const result = mathParser.parse(expression)
+            // when
+            const result = mathParser.parseExpression()
         
-                // then
-                expect(result).toEqual(testData.expectedResult);
+            // then
+            expect(result).toEqual(testData.expectedResult);
+        }) 
+    );
+
+    
+    triplePlusMinusOperationData.forEach(testData => 
+        it("Valid four numbers addition/subtraction expression", function() {
+            // given
+            const expression = `${testData.num1}${testData.operator1}${testData.num2}${testData.operator2}${testData.num3}${testData.operator3}${testData.num4}`;
+            mathParser = new MathParser(expression);
+
+            // when
+            const result = mathParser.parseExpression();
+            
+            // then
+            expect(result).toEqual(testData.expectedResult);
             }) 
         );
 
-    [
-        {num1: 1, num2: 2, num3: 3, num4: 4, operator1: "+", operator2: "+", operator3: "+", expectedResult: 10},
-        {num1: -1, num2: 2, num3: 3, num4: 4, operator1: "+", operator2: "+", operator3: "+", expectedResult: 8},
-        {num1: 1, num2: 2, num3: 3, num4: 4, operator1: "-", operator2: "+", operator3: "+", expectedResult: 6},
-        {num1: -1, num2: 2, num3: 3, num4: 4, operator1: "-", operator2: "+", operator3: "+", expectedResult: 4},
-        {num1: 1, num2: 2, num3: 3, num4: 4, operator1: "+", operator2: "-", operator3: "+", expectedResult: 4},
-        {num1: -1, num2: 2, num3: 3, num4: 4, operator1: "+", operator2: "-", operator3: "+", expectedResult: 2},
-        {num1: 1, num2: 2, num3: 3, num4: 4, operator1: "+", operator2: "+", operator3: "-", expectedResult: 2},
-        {num1: -1, num2: 2, num3: 3, num4: 4, operator1: "+", operator2: "+", operator3: "-", expectedResult: 0},
-        {num1: 1, num2: 2, num3: 3, num4: 4, operator1: "-", operator2: "-", operator3: "+", expectedResult: 0},
-        {num1: -1, num2: 2, num3: 3, num4: 4, operator1: "-", operator2: "-", operator3: "+", expectedResult: -2},
-        {num1: 1, num2: 2, num3: 3, num4: 4, operator1: "-", operator2: "+", operator3: "-", expectedResult: -2},
-        {num1: -1, num2: 2, num3: 3, num4: 4, operator1: "-", operator2: "+", operator3: "-", expectedResult: -4},
-        {num1: 1, num2: 2, num3: 3, num4: 4, operator1: "+", operator2: "-", operator3: "-", expectedResult: -4},
-        {num1: -1, num2: 2, num3: 3, num4: 4, operator1: "+", operator2: "-", operator3: "-", expectedResult: -6},
-        {num1: 1, num2: 2, num3: 3, num4: 4, operator1: "-", operator2: "-", operator3: "-", expectedResult: -8},
-        {num1: -1, num2: 2, num3: 3, num4: 4, operator1: "-", operator2: "-", operator3: "-", expectedResult: -10},
-        {num1: 0, num2: 0, num3: 0, num4: 0, operator1: "+", operator2: "+", operator3: "+", expectedResult: 0},
-        {num1: 0, num2: 0, num3: 0, num4: 0, operator1: "-", operator2: "-", operator3: "-", expectedResult: 0},
-    ]
-        .forEach(testData => 
-            it("Valid four numbers expression", function() {
-                // given
-                const expression = `${testData.num1}${testData.operator1}${testData.num2}${testData.operator2}${testData.num3}${testData.operator3}${testData.num4}`;
-                mathParser = new MathParser(expression);
+    
+    singleMultiplyDivideOperationData.forEach(testData => 
+        it("Valid two numbers multiplication/division expression", function() {
+            // given
+            const expression = `${testData.num1}${testData.operator}${testData.num2}`;
+            mathParser = new MathParser(expression);
+        
+            // when
+            const result = mathParser.parseExpression();
+        
+            // then
+            expect(result).toEqual(testData.expectedResult);
+        })
+    );
 
-                // when
-                const result = mathParser.parse();
-            
-                // then
-                expect(result).toEqual(testData.expectedResult);
-                }) 
-            );
+    doubleMultiplyDivideOperationData.forEach(testData => 
+        it("Valid three numbers multiplication/division expression", function() {
+            // given
+            const expression = `${testData.num1}${testData.operator1}${testData.num2}${testData.operator2}${testData.num3}`;
+            mathParser = new MathParser(expression);
+        
+            // when
+            const result = mathParser.parseExpression();
+        
+            // then
+            expect(result).toEqual(testData.expectedResult);
+        })
+    );
+
+    doubleMixedOperationData.forEach(testData => 
+        it("Valid three numbers addition/subtraction/multiplication/division expression", function() {
+            // given
+            const expression = `${testData.num1}${testData.operator1}${testData.num2}${testData.operator2}${testData.num3}`;
+            mathParser = new MathParser(expression);
+        
+            // when
+            const result = mathParser.parseExpression();
+        
+            // then
+            expect(result).toEqual(testData.expectedResult);
+        })
+    );
+
+    parenthesisOperationData.forEach(testData => 
+        it(`Valid expression with parenthesis = ${testData.expression}`, function() {
+            // given
+            const expression = testData.expression;
+            mathParser = new MathParser(expression);
+        
+            // when
+            const result = mathParser.parseExpression();
+        
+            // then
+            expect(result).toEqual(testData.expectedResult);
+        })
+    );
+
+    caretOperationData.forEach(testData => 
+        it(`Valid expression with caret = ${testData.expression}`, function() {
+            // given
+            const expression = testData.expression;
+            mathParser = new MathParser(expression);
+        
+            // when
+            const result = mathParser.parseExpression();
+        
+            // then
+            expect(result).toEqual(testData.expectedResult);
+        })
+    );
 
 });

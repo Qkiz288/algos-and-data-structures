@@ -2,76 +2,137 @@ const Tokenizer = require('./Tokenizer').Tokenizer;
 const OperatorToken = require('./tokens/OperatorToken').OperatorToken;
 const PlusToken = require('./tokens/PlusToken').PlusToken;
 const MinusToken = require('./tokens/MinusToken').MinusToken;
+const MultiplicationToken = require('./tokens/MultiplicationToken').MultiplicationToken;
+const DivisionToken = require('./tokens/DivisionToken').DivisionToken;
+const OpeningBracketToken = require('./tokens/OpeningBracketToken').OpeningBracketToken;
+const ClosingBracketToken = require('./tokens/ClosingBracketToken').ClosingBracketToken;
 const NumberToken = require('./tokens/NumberToken').NumberToken;
+const DotToken = require('./tokens/DotToken').DotToken;
+const CaretToken = require('./tokens/CaretToken').CaretToken;
 
 module.exports.MathParser = class MathParser {
     constructor(expression) {
         this.tokenizer = new Tokenizer(expression);
     }
 
-    parse() {
-        let result = this.parseExpression();
-        const nextToken = this.tokenizer.getNext();
-
-        if (nextToken instanceof OperatorToken) {
-            const operator = nextToken;
-            const secondNumber = this.parse();
-
-            if (operator instanceof PlusToken || operator instanceof MinusToken) {
-                return result + secondNumber;
-            }
-
-            throw new Error(`Unknown operator: ${operator}`);
-        }
-
-        return result;
-    }
-
+    // Expression := [ "-" ] Term { ("+" | "-") Term }
     parseExpression() {
-        const firstToken = this.tokenizer.getCurrent();
-        let firstNumber;
-
-        if (firstToken instanceof MinusToken) {
-            this.tokenizer.moveForward();
-            firstNumber = this.parseNumber() * -1;
-        } else if (firstToken instanceof PlusToken) {
-            this.tokenizer.moveForward();
-            firstNumber = this.parseNumber();
-        } else {
-            firstNumber = this.parseNumber();
-        }
-
-        const nextToken = this.tokenizer.getNext();
-
-        if (!nextToken) {
-            return firstNumber;
-        }
-
-        if (nextToken instanceof OperatorToken) {
-            const operator = nextToken;
+        const isNegative = this.nextIsMinus();
+        if (isNegative) {
             this.tokenizer.getNext();
-
-            const secondNumber = this.parseNumber();
-
-            if (operator instanceof PlusToken) {
-                return firstNumber + secondNumber;
-            }
-
-            if (operator instanceof MinusToken) {
-                return firstNumber - secondNumber;
-            }
-
-            throw new Error(`Unknown operator: ${operator}`);
         }
-
-        throw new Error(`Expected operator after number but got: ${nextToken}`);
+        let valueOfExpression = this.parseTerm();
+        if (isNegative) {
+            valueOfExpression = -valueOfExpression;
+        }
+        while (this.nextIsMinusOrPlus()) {
+            const operand = this.tokenizer.getNext();
+            const nextTermValue = this.parseTerm();
+            if (operand instanceof PlusToken) {
+                valueOfExpression += nextTermValue;
+            } else {
+                valueOfExpression -= nextTermValue;
+            }
+        }
+        return valueOfExpression;
     }
 
-    parseNumber() {
-        const token = this.tokenizer.getCurrent();
-        if (token instanceof NumberToken) {
-            return token.value;
+    // Term := Factor { ( "*" | "/" ) Factor }
+    parseTerm() {
+        let totalValue = this.parseFactor();
+        while (this.nextIsMultiplicationOrDivision()) {
+            const operand = this.tokenizer.getNext();
+            const nextFactor = this.parseFactor();
+
+            if (operand instanceof MultiplicationToken) {
+                totalValue *= nextFactor;
+            } else {
+                totalValue /= nextFactor;
+            }
         }
-        throw new Error(`Expected a number but found: ${token}`);
+        return totalValue;
+    }
+
+    // Factor := RealNumber [ "^" "(" Factor ")" ] | "(" Expression ")"
+    parseFactor() {
+        if (this.nextIsDigit()) {
+            let number = this.parseNumber();
+
+            if (this.nextIsCaret()) {
+                number = this.parseExponent(number);
+            }
+
+            return number;
+        }
+
+        if (!this.nextIsOpeningBracket()) {
+            throw new Error(`Expected number or '(', but got: ${this.tokenizer.getNext()}`);
+        }
+
+        this.tokenizer.getNext();
+        let value = this.parseExpression();
+
+        if (!this.nextIsClosingBracket()) {
+            throw new Error(`Expected ')', but got: ${this.tokenizer.getNext()}`);
+        }
+        this.tokenizer.getNext();
+        if (this.nextIsCaret()) {
+            value = this.parseExponent(value);
+        }
+        return value;
+    }
+
+    nextIsMinus() {
+        return this.tokenizer.isNextOfType(MinusToken);
+    }
+
+    nextIsMinusOrPlus() {
+        return this.tokenizer.isNextOfType(MinusToken) || this.tokenizer.isNextOfType(PlusToken);
+    }
+    
+    nextIsMultiplicationOrDivision() {
+        return this.tokenizer.isNextOfType(MultiplicationToken) || this.tokenizer.isNextOfType(DivisionToken);
+    }
+
+    nextIsDigit() {
+        return this.tokenizer.isNextOfType(NumberToken);
+    }
+
+    nextIsDot() {
+        return this.tokenizer.isNextOfType(DotToken);
+    }
+
+    nextIsOpeningBracket() {
+        return this.tokenizer.isNextOfType(OpeningBracketToken);
+    }
+
+    nextIsClosingBracket() {
+        return this.tokenizer.isNextOfType(ClosingBracketToken);
+    }
+
+    nextIsCaret() {
+        return this.tokenizer.isNextOfType(CaretToken);
+    }
+
+    // RealNumber := Digit{Digit} [ "." Digit{Digit} ]
+    parseNumber() {
+        const token = this.tokenizer.getNext();
+        if (!(token instanceof NumberToken)) {
+            throw new Error(`Expected a number but found: ${token}`);
+        }
+        const digits = [];
+        digits.push(token.value);
+        while (this.nextIsDigit() || this.nextIsDot()) {
+            const nextToken = this.tokenizer.getNext();
+            digits.push(nextToken.value);
+        }
+        const number = digits.join("");
+        return +number;
+    }
+
+    parseExponent(base) {
+        this.tokenizer.getNext();
+        const exponentValue = this.parseFactor();
+        return Math.pow(base, exponentValue);
     }
 }

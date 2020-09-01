@@ -191,15 +191,30 @@ module.exports.parenthesisOperationData = [
     {expression: "-1*(0.5+2.5)-2*(1+2)", expectedResult: -9},
     {expression: "-1*(0.5+2.5)*2*(1+2)", expectedResult: -18},
     {expression: "-1*(0.5+2.5)/2*(1+2)", expectedResult: -4.5},
+
+    {expression: "(1+2)+(3+4)", expectedResult: 10},
+    {expression: "-(1+2)+(3+4)", expectedResult: 4},
+    {expression: "(1+2)-(3+4)", expectedResult: -4},
+    {expression: "-(1+2)-(3+4)", expectedResult: -10},
+    {expression: "(1+2)*(3+4)", expectedResult: 21},
+    {expression: "-(1+2)*(3+4)", expectedResult: -21},
+    {expression: "(1+3)/(3+5)", expectedResult: 0.5},
+    {expression: "-(1+3)/(3+5)", expectedResult: -0.5},
 ];
 
 module.exports.caretOperationData = [
     {expression: "2^2", expectedResult: 4},
     {expression: "2^(-2)", expectedResult: 0.25},
     {expression: "2^(2^2)", expectedResult: 16},
+    {expression: "(2+2)^2", expectedResult: 16},
+    {expression: "(2+2)^(0.5+1.5)", expectedResult: 16},
+    {expression: "(2+2)^(3-1)", expectedResult: 16},
+    {expression: "(2+2)^(2*1)", expectedResult: 16},
+    {expression: "(2+2)^(4/2)", expectedResult: 16},
     {expression: "2^(1+2)+2", expectedResult: 10},
     {expression: "2^(1-2)*2", expectedResult: 1},
     {expression: "2^(2*2)-2", expectedResult: 14},
     {expression: "4^(1/2)/2", expectedResult: 1},
-    {expression: "1+3*2-2^2*0", expectedResult: 7}
+    {expression: "1+3*2-2^2*0", expectedResult: 7},
+    {expression: "(2^(15-(4^2))*2^(1+100^(16-4^2)))/0.5", expectedResult: 4}
 ];

@@ -59,9 +59,7 @@ module.exports.MathParser = class MathParser {
             let number = this.parseNumber();
 
             if (this.nextIsCaret()) {
-                this.tokenizer.getNext();
-                const caretExpression = this.parseFactor();
-                number = Math.pow(number, caretExpression);
+                number = this.parseExponent(number);
             }
 
             return number;
@@ -72,12 +70,15 @@ module.exports.MathParser = class MathParser {
         }
 
         this.tokenizer.getNext();
-        const value = this.parseExpression();
+        let value = this.parseExpression();
 
         if (!this.nextIsClosingBracket()) {
             throw new Error(`Expected ')', but got: ${this.tokenizer.getNext()}`);
         }
         this.tokenizer.getNext();
+        if (this.nextIsCaret()) {
+            value = this.parseExponent(value);
+        }
         return value;
     }
 
@@ -113,6 +114,7 @@ module.exports.MathParser = class MathParser {
         return this.tokenizer.isNextOfType(CaretToken);
     }
 
+    // RealNumber := Digit{Digit} [ "." Digit{Digit} ]
     parseNumber() {
         const token = this.tokenizer.getNext();
         if (!(token instanceof NumberToken)) {
@@ -126,5 +128,11 @@ module.exports.MathParser = class MathParser {
         }
         const number = digits.join("");
         return +number;
+    }
+
+    parseExponent(base) {
+        this.tokenizer.getNext();
+        const exponentValue = this.parseFactor();
+        return Math.pow(base, exponentValue);
     }
 }

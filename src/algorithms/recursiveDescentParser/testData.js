@@ -96,5 +96,30 @@ module.exports.singleMultiplyDivideOperationData = [
     {num1: 10, num2: 2, operator: "/", expectedResult: 5}, 
     {num1: -10, num2: 2, operator: "/", expectedResult: -5},
     {num1: 1, num2: 20, operator: "/", expectedResult: 0.05},
-    {num1: -1, num2: 20, operator: "/", expectedResult: -0.05}, 
+    {num1: -1, num2: 20, operator: "/", expectedResult: -0.05},
+
+    {num1: 0, num2: 999, operator: "*", expectedResult: 0},
+    {num1: 0, num2: 999, operator: "/", expectedResult: 0},
+];
+
+module.exports.doubleMultiplyDivideOperationData = [
+    {num1: 1, num2: 2, num3: 3, operator1: "*", operator2: "*", expectedResult: 6},
+    {num1: 10, num2: 2, num3: 3, operator1: "*", operator2: "*", expectedResult: 60},
+    {num1: 1, num2: 20, num3: 3, operator1: "*", operator2: "*", expectedResult: 60},
+    {num1: 1, num2: 2, num3: 30, operator1: "*", operator2: "*", expectedResult: 60},
+
+    {num1: 1, num2: 2, num3: 4, operator1: "*", operator2: "/", expectedResult: 0.5},
+    {num1: 10, num2: 2, num3: 4, operator1: "*", operator2: "/", expectedResult: 5},
+    {num1: 1, num2: 20, num3: 4, operator1: "*", operator2: "/", expectedResult: 5},
+    {num1: 1, num2: 2, num3: 10, operator1: "*", operator2: "/", expectedResult: 0.2},
+
+    {num1: 1, num2: 2, num3: 4, operator1: "/", operator2: "*", expectedResult: 2},
+    {num1: 10, num2: 2, num3: 4, operator1: "/", operator2: "*", expectedResult: 20},
+    {num1: 1, num2: 20, num3: 4, operator1: "/", operator2: "*", expectedResult: 0.2},
+    {num1: 1, num2: 2, num3: 10, operator1: "/", operator2: "*", expectedResult: 5},
+
+    {num1: 1, num2: 2, num3: 4, operator1: "/", operator2: "/", expectedResult: 0.125},
+    {num1: 10, num2: 2, num3: 4, operator1: "/", operator2: "/", expectedResult: 1.25},
+    {num1: 1, num2: 20, num3: 4, operator1: "/", operator2: "/", expectedResult: 0.0125},
+    {num1: 1, num2: 2, num3: 10, operator1: "/", operator2: "/", expectedResult: 0.05},
 ];

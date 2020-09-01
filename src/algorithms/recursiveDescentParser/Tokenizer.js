@@ -2,6 +2,7 @@ const NumberToken = require('./tokens/NumberToken').NumberToken;
 const PlusToken = require('./tokens/PlusToken').PlusToken;
 const MinusToken = require('./tokens/MinusToken').MinusToken;
 const MultiplicationToken = require('./tokens/MultiplicationToken').MultiplicationToken;
+const DivisionToken = require('./tokens/DivisionToken').DivisionToken;
 const OpeningBracketToken = require('./tokens/OpeningBracketToken').OpeningBracketToken;
 const ClosingBracketToken = require('./tokens/ClosingBracketToken').ClosingBracketToken;
 

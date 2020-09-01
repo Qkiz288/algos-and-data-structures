@@ -64,7 +64,7 @@ module.exports.Tokenizer = class Tokenizer {
 
             else if (char === "(") {
                 const openingBracketToken = new OpeningBracketToken();
-                tokens.push(divisionToken);
+                tokens.push(openingBracketToken);
             }
 
             else if (char === ")") {

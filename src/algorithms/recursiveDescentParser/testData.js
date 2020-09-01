@@ -145,3 +145,50 @@ module.exports.doubleMixedOperationData = [
     {num1: -1, num2: 2, num3: 3, operator1: "/", operator2: "+", expectedResult: 2.5},
     {num1: -1, num2: 2, num3: 3, operator1: "/", operator2: "-", expectedResult: -3.5},
 ];
+
+module.exports.parenthesisOperationData = [
+    {expression: "2*(3+4)", expectedResult: 14},
+    {expression: "2/(7+3)", expectedResult: 0.2},
+    {expression: "2+(3+4)", expectedResult: 9},
+    {expression: "2-(3+4)", expectedResult: -5},
+
+    {expression: "2*(3-4)", expectedResult: -2},
+    {expression: "2/(7-3)", expectedResult: 0.5},
+    {expression: "2+(3-4)", expectedResult: 1},
+    {expression: "2-(3-4)", expectedResult: 3},
+
+    {expression: "2*(3*4)", expectedResult: 24},
+    {expression: "21/(7*3)", expectedResult: 1},
+    {expression: "2+(3*4)", expectedResult: 14},
+    {expression: "2-(3*4)", expectedResult: -10},
+
+    {expression: "2*(12/4)", expectedResult: 6},
+    {expression: "5/(5/2)", expectedResult: 2},
+    {expression: "2+(3/4)", expectedResult: 2.75},
+    {expression: "2-(3/4)", expectedResult: 1.25},
+
+    {expression: "2*(3+4+(1+2))", expectedResult: 20},
+    {expression: "2/(7+3-(2+3))", expectedResult: 0.4},
+    {expression: "2+(3+4*(1+2))", expectedResult: 17},
+    {expression: "2-(3+4/(4+4))", expectedResult: -1.5},
+
+    {expression: "2*(3-4+(1+2))", expectedResult: 4},
+    {expression: "2/(7-3-(1+2))", expectedResult: 2},
+    {expression: "2+(3-4*(1+2))", expectedResult: -7},
+    {expression: "2-(3-4/(1+3))", expectedResult: 0},
+
+    {expression: "2*(3*4+(1+2))", expectedResult: 30},
+    {expression: "18/(7*3-(1+2))", expectedResult: 1},
+    {expression: "2+(3*4*(1+2))", expectedResult: 38},
+    {expression: "2-(3*4/(1+2))", expectedResult: -2},
+
+    {expression: "2*(12/4+(1+2))", expectedResult: 12},
+    {expression: "2/(5/2-(1+2))", expectedResult: -4},
+    {expression: "2+(3/4*(1+2))", expectedResult: 4.25},
+    {expression: "2-(3/4/(1+2))", expectedResult: 1.75},
+
+    {expression: "-1*(1+2)+2*(1+2)", expectedResult: 3},
+    {expression: "-1*(1+2)-2*(1+2)", expectedResult: -9},
+    {expression: "-1*(1+2)*2*(1+2)", expectedResult: -18},
+    {expression: "-1*(1+2)/2*(1+2)", expectedResult: -4.5},
+];

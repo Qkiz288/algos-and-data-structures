@@ -62,6 +62,7 @@ module.exports.MathParser = class MathParser {
             throw new Error(`Expected number or '(', but got: ${this.tokenizer.getNext()}`);
         }
 
+        this.tokenizer.getNext();
         const value = this.parseExpression();
 
         if (!this.nextIsClosingBracket()) {

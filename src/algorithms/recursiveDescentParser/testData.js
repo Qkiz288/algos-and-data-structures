@@ -123,3 +123,25 @@ module.exports.doubleMultiplyDivideOperationData = [
     {num1: 1, num2: 20, num3: 4, operator1: "/", operator2: "/", expectedResult: 0.0125},
     {num1: 1, num2: 2, num3: 10, operator1: "/", operator2: "/", expectedResult: 0.05},
 ];
+
+module.exports.doubleMixedOperationData = [
+    {num1: 1, num2: 2, num3: 3, operator1: "+", operator2: "*", expectedResult: 7},
+    {num1: 1, num2: 2, num3: 3, operator1: "-", operator2: "*", expectedResult: -5},
+    {num1: 1, num2: 2, num3: 3, operator1: "*", operator2: "+", expectedResult: 5},
+    {num1: 1, num2: 2, num3: 3, operator1: "*", operator2: "-", expectedResult: -1},
+
+    {num1: -1, num2: 2, num3: 3, operator1: "+", operator2: "*", expectedResult: 5},
+    {num1: -1, num2: 2, num3: 3, operator1: "-", operator2: "*", expectedResult: -7},
+    {num1: -1, num2: 2, num3: 3, operator1: "*", operator2: "+", expectedResult: 1},
+    {num1: -1, num2: 2, num3: 3, operator1: "*", operator2: "-", expectedResult: -5},
+
+    {num1: 1, num2: 2, num3: 4, operator1: "+", operator2: "/", expectedResult: 1.5},
+    {num1: 1, num2: 2, num3: 4, operator1: "-", operator2: "/", expectedResult: 0.5},
+    {num1: 1, num2: 2, num3: 3, operator1: "/", operator2: "+", expectedResult: 3.5},
+    {num1: 1, num2: 2, num3: 3, operator1: "/", operator2: "-", expectedResult: -2.5},
+
+    {num1: -1, num2: 2, num3: 4, operator1: "+", operator2: "/", expectedResult: -0.5},
+    {num1: -1, num2: 2, num3: 4, operator1: "-", operator2: "/", expectedResult: -1.5},
+    {num1: -1, num2: 2, num3: 3, operator1: "/", operator2: "+", expectedResult: 2.5},
+    {num1: -1, num2: 2, num3: 3, operator1: "/", operator2: "-", expectedResult: -3.5},
+];

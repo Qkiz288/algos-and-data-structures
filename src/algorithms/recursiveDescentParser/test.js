@@ -4,6 +4,7 @@ const doublePlusMinusOperationData = require('./testData').doublePlusMinusOperat
 const triplePlusMinusOperationData = require('./testData').triplePlusMinusOperationData;
 const singleMultiplyDivideOperationData = require('./testData').singleMultiplyDivideOperationData;
 const doubleMultiplyDivideOperationData = require('./testData').doubleMultiplyDivideOperationData;
+const doubleMixedOperationData = require('./testData').doubleMixedOperationData;
 
 describe("Recursive Descent Parser tests", function() {
 
@@ -69,6 +70,20 @@ describe("Recursive Descent Parser tests", function() {
 
     doubleMultiplyDivideOperationData.forEach(testData => 
         it("Valid three numbers multiplication/division expression", function() {
+            // given
+            const expression = `${testData.num1}${testData.operator1}${testData.num2}${testData.operator2}${testData.num3}`;
+            mathParser = new MathParser(expression);
+        
+            // when
+            const result = mathParser.parseExpression();
+        
+            // then
+            expect(result).toEqual(testData.expectedResult);
+        })
+    );
+
+    doubleMixedOperationData.forEach(testData => 
+        it("Valid three numbers addition/subtraction/multiplication/division expression", function() {
             // given
             const expression = `${testData.num1}${testData.operator1}${testData.num2}${testData.operator2}${testData.num3}`;
             mathParser = new MathParser(expression);

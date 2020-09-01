@@ -1,0 +1,5 @@
+Persistent priority queue is a extended priority queue data structure with ability to preserve previous version
+of itself when it is modified. They can be considered as ‘immutable’ as updates are not in-place.
+
+A data structure is partially persistent if all versions can be accessed but only the newest version can be modified. 
+Fully persistent if every version can be both accessed and modified.

@@ -1,8 +1,7 @@
 module.exports.Node = class Node {
-    constructor(val, priority, version) {
+    constructor(val, priority) {
         this.val = val;
         this.priority = priority;
         this.history = [];
-        this.history.push(version);
     }
 }

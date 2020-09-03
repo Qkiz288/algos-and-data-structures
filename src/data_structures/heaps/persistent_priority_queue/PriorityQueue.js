@@ -3,14 +3,17 @@ const Node = require('./Node').Node;
 module.exports.PriorityQueue = class PriorityQueue {
     constructor() {
         this.values = [];
-        this.latestVersion = 1;
+        this.historicalNodes = [];
+        this.latestVersion = 0;
     }
 
-    enqueue(value, priority) {
-        this.latestVersion += this.latestVersion;
-        const node = new Node(value, priority, this.latestVersion);
+    enqueue(value, priority, updateHistory = true) {
+        const node = new Node(value, priority);
         this.values.push(node);
         this.bubbleUp();
+        if (updateHistory) {
+            this.historicalNodes.push(node);
+            this.updateNodesVersion()};
     }
 
     dequeue() {
@@ -20,6 +23,7 @@ module.exports.PriorityQueue = class PriorityQueue {
         this.swap(0, this.values.length - 1);
         const extracted = this.values.pop();
         this.bubbleDown();
+        this.updateNodesVersion();
         return extracted;
     }
 
@@ -69,8 +73,20 @@ module.exports.PriorityQueue = class PriorityQueue {
         this.values[index2] = temp;
     }
 
-    getVersion(version) {
+    updateNodesVersion() {
+        this.latestVersion += 1;
+        this.values.forEach(node => node.history.push(this.latestVersion));
+        const a = 1;
+    }
 
+    getVersion(version) {
+        const nodes = this.historicalNodes.filter(node => node.history.includes(version));
+        const versionQueue = new PriorityQueue();
+        versionQueue.historicalNodes = Array.from(this.historicalNodes);
+        for (const node of nodes) {
+            versionQueue.enqueue(node.val, node.priority, false);
+        }
+        return versionQueue;
     }
 
 }

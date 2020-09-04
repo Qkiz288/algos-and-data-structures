@@ -1,19 +1,18 @@
 const Node = require('./Node').Node;
+const NodeHistory = require('./NodeHistory').NodeHistory;
 
 module.exports.PriorityQueue = class PriorityQueue {
     constructor() {
         this.values = [];
-        this.historicalNodes = [];
+        this.nodesHistory = [];
         this.latestVersion = 0;
     }
 
-    enqueue(value, priority, updateHistory = true) {
+    enqueue(value, priority) {
         const node = new Node(value, priority);
         this.values.push(node);
         this.bubbleUp();
-        if (updateHistory) {
-            this.historicalNodes.push(node);
-            this.updateNodesVersion()};
+        this.updateNodesHistory();
     }
 
     dequeue() {
@@ -23,7 +22,7 @@ module.exports.PriorityQueue = class PriorityQueue {
         this.swap(0, this.values.length - 1);
         const extracted = this.values.pop();
         this.bubbleDown();
-        this.updateNodesVersion();
+        this.updateNodesHistory();
         return extracted;
     }
 
@@ -73,20 +72,21 @@ module.exports.PriorityQueue = class PriorityQueue {
         this.values[index2] = temp;
     }
 
-    updateNodesVersion() {
+    updateNodesHistory() {
         this.latestVersion += 1;
-        this.values.forEach(node => node.history.push(this.latestVersion));
-        const a = 1;
+        this.values.forEach(node => {
+            const index = this.values.indexOf(node);
+            const nodeHistory = new NodeHistory(this.latestVersion, index, node);
+            this.nodesHistory.push(nodeHistory);
+        });
     }
 
-    getVersion(version) {
-        const nodes = this.historicalNodes.filter(node => node.history.includes(version));
-        const versionQueue = new PriorityQueue();
-        versionQueue.historicalNodes = Array.from(this.historicalNodes);
-        for (const node of nodes) {
-            versionQueue.enqueue(node.val, node.priority, false);
+    switchToVersion(version) {
+        const historicalNodes = this.nodesHistory.filter(node => node.version === version);
+        this.values.length = 0;
+        for (const historicalNode of historicalNodes) {
+            this.values.splice(historicalNode.index, 0, historicalNode.node);
         }
-        return versionQueue;
     }
 
 }

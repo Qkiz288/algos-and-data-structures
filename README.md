@@ -33,6 +33,7 @@ Stack: Javascript, Jasmine, Node.js
   - Hash Table
   - Heap
     - MaxBinaryHeap
+    - PersistentPriorityQueue
     - PriorityQueue
   - Queue
   - Singly Linked List

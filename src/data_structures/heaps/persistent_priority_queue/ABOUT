@@ -4,5 +4,5 @@ of itself when it is modified. They can be considered as ‘immutable’ as upda
 A data structure is partially persistent if all versions can be accessed but only the newest version can be modified. 
 Fully persistent if every version can be both accessed and modified.
 
-Idea implemented in order to get previous versions of the queue is to make every node store its 'version'
-label. Additionally, queue is holding historical nodes (removed). Using version and historical nodes, new queue is built and returned.
+Idea implemented in order to get specific version of the queue is to hold nodes history.
+Using desired version and nodes history, queue is rearranged after calling `switchToVersion()`.

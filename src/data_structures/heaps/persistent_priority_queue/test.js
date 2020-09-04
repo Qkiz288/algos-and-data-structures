@@ -102,19 +102,19 @@ describe("Priority Queue (min) tests", function() {
         minPriorityQueue.enqueue(val3, prio3);
         minPriorityQueue.dequeue();
         minPriorityQueue.enqueue(val4, prio4);
+        const previousVersion = minPriorityQueue.latestVersion - 1;
+        const expectedHistory = _.cloneDeep(minPriorityQueue.nodesHistory);
 
         // when
-        const previousVersion = minPriorityQueue.latestVersion - 1;
-        const expectedHistory = _.cloneDeep(minPriorityQueue.historicalNodes);
-        const previousVersionQueue = minPriorityQueue.getVersion(previousVersion);
+        minPriorityQueue.switchToVersion(previousVersion);
 
         // then
-        expect(previousVersionQueue.values.length).toBe(2);
-        expect(previousVersionQueue.historicalNodes).toEqual(expectedHistory);
-        expect(previousVersionQueue.values[0].val).toEqual(val2);
-        expect(previousVersionQueue.values[0].priority).toEqual(prio2);
-        expect(previousVersionQueue.values[1].val).toEqual(val1);
-        expect(previousVersionQueue.values[1].priority).toEqual(prio1);
+        expect(minPriorityQueue.values.length).toBe(2);
+        expect(minPriorityQueue.nodesHistory).toEqual(expectedHistory);
+        expect(minPriorityQueue.values[0].val).toEqual(val2);
+        expect(minPriorityQueue.values[0].priority).toEqual(prio2);
+        expect(minPriorityQueue.values[1].val).toEqual(val1);
+        expect(minPriorityQueue.values[1].priority).toEqual(prio1);
     });
 
     it("Revert to second previous version", function() {
@@ -132,21 +132,21 @@ describe("Priority Queue (min) tests", function() {
         minPriorityQueue.enqueue(val3, prio3);
         minPriorityQueue.dequeue();
         minPriorityQueue.enqueue(val4, prio4);
+        const previousVersion = minPriorityQueue.latestVersion - 2;
+        const expectedHistory = _.cloneDeep(minPriorityQueue.nodesHistory);
 
         // when
-        const previousVersion = minPriorityQueue.latestVersion - 2;
-        const expectedHistory = _.cloneDeep(minPriorityQueue.historicalNodes);
-        const previousVersionQueue = minPriorityQueue.getVersion(previousVersion);
+        minPriorityQueue.switchToVersion(previousVersion);
 
         // then
-        expect(previousVersionQueue.values.length).toBe(3);
-        expect(previousVersionQueue.historicalNodes).toEqual(expectedHistory);
-        expect(previousVersionQueue.values[0].val).toEqual(val3);
-        expect(previousVersionQueue.values[0].priority).toEqual(prio3);
-        expect(previousVersionQueue.values[1].val).toEqual(val1);
-        expect(previousVersionQueue.values[1].priority).toEqual(prio1);
-        expect(previousVersionQueue.values[2].val).toEqual(val2);
-        expect(previousVersionQueue.values[2].priority).toEqual(prio2);
+        expect(minPriorityQueue.values.length).toBe(3);
+        expect(minPriorityQueue.nodesHistory).toEqual(expectedHistory);
+        expect(minPriorityQueue.values[0].val).toEqual(val3);
+        expect(minPriorityQueue.values[0].priority).toEqual(prio3);
+        expect(minPriorityQueue.values[1].val).toEqual(val1);
+        expect(minPriorityQueue.values[1].priority).toEqual(prio1);
+        expect(minPriorityQueue.values[2].val).toEqual(val2);
+        expect(minPriorityQueue.values[2].priority).toEqual(prio2);
     });
 
     it("Dequeue all and revert", function() {
@@ -167,23 +167,23 @@ describe("Priority Queue (min) tests", function() {
         minPriorityQueue.dequeue();
         minPriorityQueue.dequeue();
         minPriorityQueue.dequeue();
+        const previousVersion = minPriorityQueue.latestVersion - 4;
+        const expectedHistory = _.cloneDeep(minPriorityQueue.nodesHistory);
 
         // when
-        const previousVersion = minPriorityQueue.latestVersion - 4;
-        const expectedHistory = _.cloneDeep(minPriorityQueue.historicalNodes);
-        const previousVersionQueue = minPriorityQueue.getVersion(previousVersion);
+        minPriorityQueue.switchToVersion(previousVersion);
 
         // then
-        expect(previousVersionQueue.values.length).toBe(4);
-        expect(previousVersionQueue.historicalNodes).toEqual(expectedHistory);
-        expect(previousVersionQueue.values[0].val).toEqual(val3);
-        expect(previousVersionQueue.values[0].priority).toEqual(prio3);
-        expect(previousVersionQueue.values[1].val).toEqual(val4);
-        expect(previousVersionQueue.values[1].priority).toEqual(prio4);
-        expect(previousVersionQueue.values[2].val).toEqual(val2);
-        expect(previousVersionQueue.values[2].priority).toEqual(prio2);
-        expect(previousVersionQueue.values[3].val).toEqual(val1);
-        expect(previousVersionQueue.values[3].priority).toEqual(prio1);
+        expect(minPriorityQueue.values.length).toBe(4);
+        expect(minPriorityQueue.nodesHistory).toEqual(expectedHistory);
+        expect(minPriorityQueue.values[0].val).toEqual(val3);
+        expect(minPriorityQueue.values[0].priority).toEqual(prio3);
+        expect(minPriorityQueue.values[1].val).toEqual(val4);
+        expect(minPriorityQueue.values[1].priority).toEqual(prio4);
+        expect(minPriorityQueue.values[2].val).toEqual(val2);
+        expect(minPriorityQueue.values[2].priority).toEqual(prio2);
+        expect(minPriorityQueue.values[3].val).toEqual(val1);
+        expect(minPriorityQueue.values[3].priority).toEqual(prio1);
     });
 
     it("Revert and get back most recent version", function() {
@@ -201,24 +201,64 @@ describe("Priority Queue (min) tests", function() {
         minPriorityQueue.enqueue(val3, prio3);
         minPriorityQueue.dequeue();
         minPriorityQueue.enqueue(val4, prio4);
-
-        // when
         const mostRecentVersion = minPriorityQueue.latestVersion;
         const previousVersion = minPriorityQueue.latestVersion - 3;
-        const expectedHistory = _.cloneDeep(minPriorityQueue.historicalNodes);
-        const previousVersionQueue = minPriorityQueue.getVersion(previousVersion);
-        const mostRecentVersionQueue = previousVersionQueue.getVersion(mostRecentVersion);
+        const expectedHistory = _.cloneDeep(minPriorityQueue.nodesHistory);
+
+        // when
+        minPriorityQueue.switchToVersion(previousVersion);
+        minPriorityQueue.switchToVersion(mostRecentVersion);
 
         // then
-        expect(previousVersionQueue.historicalNodes).toEqual(expectedHistory);
-        expect(mostRecentVersionQueue.historicalNodes).toEqual(expectedHistory);
-        expect(mostRecentVersionQueue.values.length).toBe(3);
-        expect(mostRecentVersionQueue.values[0].val).toEqual(val2);
-        expect(mostRecentVersionQueue.values[0].priority).toEqual(prio2);
-        expect(mostRecentVersionQueue.values[1].val).toEqual(val1);
-        expect(mostRecentVersionQueue.values[1].priority).toEqual(prio1);
-        expect(mostRecentVersionQueue.values[2].val).toEqual(val4);
-        expect(mostRecentVersionQueue.values[2].priority).toEqual(prio4);
+        expect(minPriorityQueue.nodesHistory).toEqual(expectedHistory);
+        expect(minPriorityQueue.values.length).toBe(3);
+        expect(minPriorityQueue.values[0].val).toEqual(val2);
+        expect(minPriorityQueue.values[0].priority).toEqual(prio2);
+        expect(minPriorityQueue.values[1].val).toEqual(val1);
+        expect(minPriorityQueue.values[1].priority).toEqual(prio1);
+        expect(minPriorityQueue.values[2].val).toEqual(val4);
+        expect(minPriorityQueue.values[2].priority).toEqual(prio4);
+    });
+
+    it("Revert, modify and get version before revert", function() {
+        // given
+        const val1 = 100;
+        const prio1 = 5;
+        const val2 = 50;
+        const prio2 = 3;
+        const val3 = 300;
+        const prio3 = 1;
+        const val4 = 300;
+        const prio4 = 4;
+        const val5 = 250;
+        const prio5 = 7;
+        const val6 = 150;
+        const prio6 = 0;
+        minPriorityQueue.enqueue(val1, prio1);
+        minPriorityQueue.enqueue(val2, prio2);
+        minPriorityQueue.enqueue(val3, prio3);
+        minPriorityQueue.enqueue(val4, prio4);
+        const desiredVersion = minPriorityQueue.latestVersion;
+        const previousVersion = minPriorityQueue.latestVersion - 2;
+
+        // when
+        minPriorityQueue.switchToVersion(previousVersion);
+        minPriorityQueue.enqueue(val5, prio5);
+        minPriorityQueue.enqueue(val6, prio6);
+        const expectedHistory = _.cloneDeep(minPriorityQueue.nodesHistory);
+        minPriorityQueue.switchToVersion(desiredVersion);
+
+        // then
+        expect(minPriorityQueue.values.length).toBe(4);
+        expect(minPriorityQueue.nodesHistory).toEqual(expectedHistory);
+        expect(minPriorityQueue.values[0].val).toEqual(val3);
+        expect(minPriorityQueue.values[0].priority).toEqual(prio3);
+        expect(minPriorityQueue.values[1].val).toEqual(val4);
+        expect(minPriorityQueue.values[1].priority).toEqual(prio4);
+        expect(minPriorityQueue.values[2].val).toEqual(val2);
+        expect(minPriorityQueue.values[2].priority).toEqual(prio2);
+        expect(minPriorityQueue.values[3].val).toEqual(val1);
+        expect(minPriorityQueue.values[3].priority).toEqual(prio1);
     });
 
     function initializeQueue() {

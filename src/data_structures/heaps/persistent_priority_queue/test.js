@@ -1,5 +1,6 @@
 const PriorityQueue = require('./PriorityQueue').PriorityQueue;
 const Node = require('./Node').Node;
+const _ = require('lodash');
 
 describe("Priority Queue (min) tests", function() {
 
@@ -104,10 +105,12 @@ describe("Priority Queue (min) tests", function() {
 
         // when
         const previousVersion = minPriorityQueue.latestVersion - 1;
+        const expectedHistory = _.cloneDeep(minPriorityQueue.historicalNodes);
         const previousVersionQueue = minPriorityQueue.getVersion(previousVersion);
 
         // then
         expect(previousVersionQueue.values.length).toBe(2);
+        expect(previousVersionQueue.historicalNodes).toEqual(expectedHistory);
         expect(previousVersionQueue.values[0].val).toEqual(val2);
         expect(previousVersionQueue.values[0].priority).toEqual(prio2);
         expect(previousVersionQueue.values[1].val).toEqual(val1);
@@ -132,10 +135,12 @@ describe("Priority Queue (min) tests", function() {
 
         // when
         const previousVersion = minPriorityQueue.latestVersion - 2;
+        const expectedHistory = _.cloneDeep(minPriorityQueue.historicalNodes);
         const previousVersionQueue = minPriorityQueue.getVersion(previousVersion);
 
         // then
         expect(previousVersionQueue.values.length).toBe(3);
+        expect(previousVersionQueue.historicalNodes).toEqual(expectedHistory);
         expect(previousVersionQueue.values[0].val).toEqual(val3);
         expect(previousVersionQueue.values[0].priority).toEqual(prio3);
         expect(previousVersionQueue.values[1].val).toEqual(val1);
@@ -165,10 +170,12 @@ describe("Priority Queue (min) tests", function() {
 
         // when
         const previousVersion = minPriorityQueue.latestVersion - 4;
+        const expectedHistory = _.cloneDeep(minPriorityQueue.historicalNodes);
         const previousVersionQueue = minPriorityQueue.getVersion(previousVersion);
 
         // then
         expect(previousVersionQueue.values.length).toBe(4);
+        expect(previousVersionQueue.historicalNodes).toEqual(expectedHistory);
         expect(previousVersionQueue.values[0].val).toEqual(val3);
         expect(previousVersionQueue.values[0].priority).toEqual(prio3);
         expect(previousVersionQueue.values[1].val).toEqual(val4);
@@ -198,10 +205,13 @@ describe("Priority Queue (min) tests", function() {
         // when
         const mostRecentVersion = minPriorityQueue.latestVersion;
         const previousVersion = minPriorityQueue.latestVersion - 3;
+        const expectedHistory = _.cloneDeep(minPriorityQueue.historicalNodes);
         const previousVersionQueue = minPriorityQueue.getVersion(previousVersion);
         const mostRecentVersionQueue = previousVersionQueue.getVersion(mostRecentVersion);
 
         // then
+        expect(previousVersionQueue.historicalNodes).toEqual(expectedHistory);
+        expect(mostRecentVersionQueue.historicalNodes).toEqual(expectedHistory);
         expect(mostRecentVersionQueue.values.length).toBe(3);
         expect(mostRecentVersionQueue.values[0].val).toEqual(val2);
         expect(mostRecentVersionQueue.values[0].priority).toEqual(prio2);
